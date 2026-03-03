@@ -15,9 +15,10 @@ func _on_play_button_pressed() -> void:
 		#playing = false
 	print("playing", playing)
 	IntermediaryMangager.playing = playing
-	$Control/PausePlay.set_frame(playing)
+	$CanvasLayer/PausePlay.set_frame(playing)
 	if playing:
 		currentBlock = self
+		IntermediaryMangager.movementDirection = Vector2.ZERO
 		_on_timer_timeout()
 		timer.start()
 		
@@ -25,7 +26,7 @@ func _on_play_button_pressed() -> void:
 		timer.stop()
 	
 
-
+var lastNode = null
 var nextNode = null
 
 # =========================
@@ -54,6 +55,7 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		newNode.call_deferred("reparent", attachingArea)
 		newNode.lastNode = newParent
 		newParent.nextNode = newNode
+		print("new node is ", newNode)
 	else:
 		print("parented in the middles")
 		newNode.call_deferred("reparent", attachingArea)
@@ -70,7 +72,7 @@ func _on_timer_timeout() -> void:
 	else:
 		currentBlock = currentBlock.nextNode
 	
-	if currentBlock.name == "MoveBlock":
+	if currentBlock.get_child(0).name == "MoveBlock":
 		IntermediaryMangager.movementDirection = currentBlock._check_for_direction()
 		print(IntermediaryMangager.movementDirection)
 	
