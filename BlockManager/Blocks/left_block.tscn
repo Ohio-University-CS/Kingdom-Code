@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dy4c3748uwx7h"]
+
+[ext_resource type="Script" uid="uid://dtigxjrvcoxte" path="res://BlockManager/Scripts/right_block.gd" id="1_444bn"]
+[ext_resource type="Texture2D" uid="uid://dd0yc7c4wlkqy" path="res://Sprites/Blocks/DIRECTION_blocks.png" id="2_3la32"]
+[ext_resource type="Script" uid="uid://cxg1413ts0dkf" path="res://BlockManager/Scripts/data_holder.gd" id="3_eb1wv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2u0lc"]
+size = Vector2(2, 2)
+
+[node name="LeftBlock" type="Node2D" unique_id=1483720473]
+script = ExtResource("1_444bn")
+
+[node name="DirectionBlocks" type="Sprite2D" parent="." unique_id=716417077]
+position = Vector2(15, 5)
+texture = ExtResource("2_3la32")
+vframes = 3
+
+[node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=809803810 groups=["ConnectFrom", "RightBlock"]]
+position = Vector2(-2, 5)
+script = ExtResource("3_eb1wv")
+direction = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToLastDetector" unique_id=58816177]
+shape = SubResource("RectangleShape2D_2u0lc")
+
+[node name="Button" type="Button" parent="." unique_id=1849221224]
+modulate = Color(1, 1, 1, 0)
+offset_left = -2.0
+offset_right = 26.0
+offset_bottom = 10.0
+action_mode = 0
+
+[node name="Center" type="Node2D" parent="." unique_id=601307753]
+position = Vector2(14, 5)
+
+[connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]
+[connection signal="area_exited" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

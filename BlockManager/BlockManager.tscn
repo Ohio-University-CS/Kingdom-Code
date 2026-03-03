@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://b2w7piu1qq0q7" path="res://Utilities/Block/block_spawner.gd" id="2_y3crg"]
 [ext_resource type="PackedScene" uid="uid://dtxobw47qu6bw" path="res://BlockManager/Blocks/right_block.tscn" id="3_1bv57"]
 [ext_resource type="Texture2D" uid="uid://b5uv1oe33sjib" path="res://Sprites/UI/PausePlay.png" id="4_1bv57"]
+[ext_resource type="PackedScene" uid="uid://bfv6pij14ncxa" path="res://BlockManager/Blocks/up_block.tscn" id="4_2eekb"]
 [ext_resource type="Texture2D" uid="uid://rtgx5fst6ma6" path="res://Sprites/Blocks/StartingBlock.png" id="4_kvxur"]
+[ext_resource type="PackedScene" uid="uid://dy4c3748uwx7h" path="res://BlockManager/Blocks/left_block.tscn" id="5_oa2n6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvxur"]
 size = Vector2(10, 6)
@@ -38,6 +40,16 @@ script = ExtResource("2_y3crg")
 position = Vector2(46, 6)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("3_1bv57")
+
+[node name="UpBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2027981136]
+position = Vector2(5, 22)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("4_2eekb")
+
+[node name="LeftBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1023990329]
+position = Vector2(46, 22)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("5_oa2n6")
 
 [node name="StartingBlock" type="Sprite2D" parent="CanvasLayer" unique_id=1408567468]
 position = Vector2(18, 87)
