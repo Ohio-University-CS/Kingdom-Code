@@ -3,10 +3,10 @@ class_name BlockQueue extends RefCounted
 var block_queue: Array = []
 
 func push() -> void:
-    pass
+	pass
 
 func pop() -> void:
-    pass
+	pass
 
 func detach() -> void:
-    pass
+	pass

@@ -12,52 +12,50 @@ size = Vector2(10, 6)
 [node name="BlockManager" type="Node2D" unique_id=1008006284]
 script = ExtResource("1_rc834")
 
-[node name="Control" type="Control" parent="." unique_id=1900489770]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1304064504]
 
-[node name="BlocksBackgroundTop" type="ColorRect" parent="Control" unique_id=1929784512]
-layout_mode = 0
+[node name="BlocksBackgroundTop" type="ColorRect" parent="CanvasLayer" unique_id=1929784512]
+z_index = -1
 offset_right = 90.0
 offset_bottom = 80.0
+mouse_filter = 2
 color = Color(1, 1, 1, 0.8117647)
 
-[node name="BlocksBackgroundBottom" type="ColorRect" parent="Control" unique_id=1684868725]
-layout_mode = 0
+[node name="BlocksBackgroundBottom" type="ColorRect" parent="CanvasLayer" unique_id=1684868725]
+z_index = -1
 offset_right = 90.0
 offset_bottom = 240.0
+mouse_filter = 2
 color = Color(0, 0, 0, 0.39607844)
 
-[node name="Spawners" type="Node2D" parent="Control" unique_id=1068301406]
+[node name="Spawners" type="Node2D" parent="CanvasLayer" unique_id=1068301406]
 
-[node name="MoveBlockSpawner" type="Node2D" parent="Control/Spawners" unique_id=899828557]
+[node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
 position = Vector2(5, 6)
 script = ExtResource("2_y3crg")
 
-[node name="RightBlockSpawner" type="Node2D" parent="Control/Spawners" unique_id=1912441362]
+[node name="RightBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1912441362]
 position = Vector2(46, 6)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("3_1bv57")
 
-[node name="StartingBlock" type="Sprite2D" parent="Control" unique_id=1408567468]
+[node name="StartingBlock" type="Sprite2D" parent="CanvasLayer" unique_id=1408567468]
 position = Vector2(18, 87)
 texture = ExtResource("4_kvxur")
 
-[node name="ConnectNextBlockDetector" type="Area2D" parent="Control/StartingBlock" unique_id=2007063981 groups=["ConnectAbove"]]
+[node name="ConnectNextBlockDetector" type="Area2D" parent="CanvasLayer/StartingBlock" unique_id=2007063981 groups=["ConnectAbove", "StartingBlock"]]
 position = Vector2(-13, 3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/StartingBlock/ConnectNextBlockDetector" unique_id=1494949178]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/StartingBlock/ConnectNextBlockDetector" unique_id=1494949178]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_kvxur")
 
-[node name="PausePlay" type="Sprite2D" parent="Control" unique_id=1694897149]
+[node name="PausePlay" type="Sprite2D" parent="CanvasLayer" unique_id=1694897149]
 position = Vector2(73, 145)
 texture = ExtResource("4_1bv57")
 vframes = 2
 
-[node name="PlayButton" type="Button" parent="Control/PausePlay" unique_id=949870556]
+[node name="PlayButton" type="Button" parent="CanvasLayer/PausePlay" unique_id=949870556]
 modulate = Color(1, 1, 1, 0)
 offset_left = -15.0
 offset_top = -15.0
@@ -68,5 +66,5 @@ offset_bottom = 15.0
 process_callback = 0
 wait_time = 0.5
 
-[connection signal="pressed" from="Control/PausePlay/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PausePlay/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

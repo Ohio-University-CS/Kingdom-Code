@@ -8,7 +8,7 @@ func _ready() -> void:
 	block.position = Vector2.ZERO
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if get_child_count() == 0:
 		var block = block_scene.instantiate()
 		add_child(block)

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cxg1413ts0dkf" path="res://BlockManager/Scripts/data_holder.gd" id="3_82a1b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u0lc"]
-size = Vector2(10, 10)
+size = Vector2(2, 2)
 
 [node name="RightBlock" type="Node2D" unique_id=1483720473]
 script = ExtResource("1_2u0lc")

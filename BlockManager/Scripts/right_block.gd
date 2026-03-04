@@ -7,7 +7,7 @@ var blockAttachingTo = Node2D
 
 var direction = Vector2.RIGHT
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if buttonHeld:
 		global_position = get_global_mouse_position() - centerOfBlock
 
@@ -19,7 +19,7 @@ func _on_button_button_down() -> void:
 
 func _on_button_button_up() -> void:
 	buttonHeld = false
-	call_deferred("reparent", get_tree().current_scene)
+	call_deferred("reparent", get_tree().current_scene.get_child(0).get_child(0))
 	if connectToBlock != null:
 		global_position = connectToBlock
 		if blockAttachingTo != null:

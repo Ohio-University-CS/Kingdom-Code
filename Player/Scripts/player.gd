@@ -6,7 +6,7 @@ var gravity = 9.8
 func _ready() -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#if Input.is_action_pressed("ui_right"): #moves right and left
 		#velocity.x = speed
 	#elif Input.is_action_pressed("ui_left"):
