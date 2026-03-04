@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dtigxjrvcoxte" path="res://BlockManager/Scripts/right_block.gd" id="1_444bn"]
 [ext_resource type="Texture2D" uid="uid://dd0yc7c4wlkqy" path="res://Sprites/Blocks/DIRECTION_blocks.png" id="2_3la32"]
-[ext_resource type="Script" uid="uid://cxg1413ts0dkf" path="res://BlockManager/Scripts/data_holder.gd" id="3_eb1wv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u0lc"]
 size = Vector2(2, 2)
@@ -17,8 +16,6 @@ vframes = 3
 
 [node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=809803810 groups=["ConnectFrom", "RightBlock"]]
 position = Vector2(-2, 5)
-script = ExtResource("3_eb1wv")
-direction = Vector2(0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToLastDetector" unique_id=58816177]
 shape = SubResource("RectangleShape2D_2u0lc")
