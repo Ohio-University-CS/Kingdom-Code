@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://56kfcf5xu6lc"]
 
-[ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://World/World.tscn" id="1_2q288"]
-[ext_resource type="Script" uid="uid://d1qgbq0fn222l" path="res://LevelManager/Scripts/level_manager.gd" id="1_114q7"]
+[ext_resource type="Script" uid="uid://tysor361mogg" path="res://LevelManager/Scripts/level_manager.gd" id="1_114q7"]
 [ext_resource type="PackedScene" uid="uid://di2xvldh334da" path="res://Player/Player.tscn" id="2_114q7"]
 
 [node name="LevelManager" type="Node2D" unique_id=1447221417]
 script = ExtResource("1_114q7")
 
-[node name="World" parent="." unique_id=795520130 instance=ExtResource("1_2q288")]
+[node name="LevelRoot" type="Node2D" parent="." unique_id=1984015215]
 
 [node name="Player" parent="." unique_id=1410869650 instance=ExtResource("2_114q7")]
-position = Vector2(41, 192)
 scale = Vector2(0.25, 0.25)

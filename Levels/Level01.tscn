@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://sm483fpkrm2y"]
+
+[ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_dd4jf"]
+
+[node name="Level" unique_id=1968834058 instance=ExtResource("1_dd4jf")]
+
+[node name="Background" parent="." index="1" unique_id=647950584]
+visible = true
+
+[node name="Grass" parent="." index="3" unique_id=194739069]
+visible = true
+
+[node name="Ground" parent="." index="4" unique_id=483763569]
+visible = true

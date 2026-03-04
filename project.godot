@@ -23,7 +23,7 @@ config/canvas_textures/default_texture_filter=0
 [autoload]
 
 EventBus="*res://Utilities/EventBus/event_bus.gd"
-IntermediaryMangager="*uid://b4n6ffs64tsag"
+IntermediaryMangager="*uid://bs5tfjxh2iles"
 
 [display]
 
@@ -33,9 +33,11 @@ window/stretch/mode="viewport"
 
 [global_group]
 
-ConnectTo=""
 ConnectFrom=""
 ConnectAbove=""
+Attachment=""
+AttachTo=""
+ConnectTo=""
 
 [layer_names]
 

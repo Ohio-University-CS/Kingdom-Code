@@ -22,7 +22,14 @@ func _physics_process(delta: float) -> void:
 	#if Input.is_action_pressed("ui_up") and is_on_floor(): #jump code
 		#velocity.y = -speed * 2
 	
+	# Apply gravity when not on floor
+	if not is_on_floor():
+		velocity.y += gravity
+	else:
+		velocity.y = 0
+	
 	if IntermediaryMangager.playing == true:
 		#print("working", IntermediaryMangager.movementDirection * speed)
-		velocity = IntermediaryMangager.movementDirection * speed
+		velocity.x = IntermediaryMangager.movementDirection.x * speed
+		# Keep the vertical velocity (gravity) separate
 		move_and_slide()
