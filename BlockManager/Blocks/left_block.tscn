@@ -1,19 +1,18 @@
-[gd_scene format=3 uid="uid://dtxobw47qu6bw"]
+[gd_scene format=3 uid="uid://dy4c3748uwx7h"]
 
-[ext_resource type="Script" uid="uid://dtigxjrvcoxte" path="res://BlockManager/Scripts/right_block.gd" id="1_2u0lc"]
-[ext_resource type="Texture2D" uid="uid://dd0yc7c4wlkqy" path="res://Sprites/Blocks/DIRECTION_blocks.png" id="1_tnhju"]
+[ext_resource type="Script" uid="uid://dtigxjrvcoxte" path="res://BlockManager/Scripts/right_block.gd" id="1_444bn"]
+[ext_resource type="Texture2D" uid="uid://dd0yc7c4wlkqy" path="res://Sprites/Blocks/DIRECTION_blocks.png" id="2_3la32"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u0lc"]
 size = Vector2(2, 2)
 
-[node name="RightBlock" type="Node2D" unique_id=1483720473]
-script = ExtResource("1_2u0lc")
+[node name="LeftBlock" type="Node2D" unique_id=1483720473]
+script = ExtResource("1_444bn")
 
 [node name="DirectionBlocks" type="Sprite2D" parent="." unique_id=716417077]
 position = Vector2(15, 5)
-texture = ExtResource("1_tnhju")
+texture = ExtResource("2_3la32")
 vframes = 3
-frame = 1
 
 [node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=809803810 groups=["ConnectFrom", "RightBlock"]]
 position = Vector2(-2, 5)
@@ -24,7 +23,7 @@ shape = SubResource("RectangleShape2D_2u0lc")
 [node name="Button" type="Button" parent="." unique_id=1849221224]
 modulate = Color(1, 1, 1, 0)
 offset_left = -2.0
-offset_right = 31.0
+offset_right = 26.0
 offset_bottom = 10.0
 action_mode = 0
 

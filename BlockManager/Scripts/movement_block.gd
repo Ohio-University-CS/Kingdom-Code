@@ -25,10 +25,12 @@ func _on_button_button_up() -> void:
 	buttonHeld = false
 	
 	var tmpParent = get_parent().get_parent() #this code is to have the last parent stop registering this node as its child
-	if tmpParent is Sprite2D:
-		tmpParent = tmpParent.get_parent()
+	if tmpParent.name == "StartingBlock":
+		tmpParent = tmpParent.get_parent().get_parent()
+		print("current parent is ", tmpParent)
 	if tmpParent.get("nextNode"):
 		tmpParent.nextNode = null
+		print("fully detached from ", tmpParent)
 	
 	
 	call_deferred("reparent", get_tree().current_scene.get_child(0).get_child(0)) #reattached node to canvasLayer
@@ -69,6 +71,12 @@ func _check_for_direction():
 	if has_node("RightBlock"):
 		print("Direction is right", Vector2.RIGHT)
 		return Vector2.RIGHT
+	elif has_node("LeftBlock"):
+		print("Direction is right", Vector2.RIGHT)
+		return Vector2.LEFT
+	elif has_node("UpBlock"):
+		print("Direction is right", Vector2.RIGHT)
+		return Vector2.UP
 	return Vector2.ZERO
 
 func _update_position():
