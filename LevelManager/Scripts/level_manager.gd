@@ -10,6 +10,17 @@ func _ready() -> void:
 	# Load the initial level
 	load_level(current_level_path)
 
+func _process(_delta: float) -> void:
+	if IntermediaryMangager.playing == false:
+		player.set_process(false)
+		player.set_physics_process(false)
+		player.animation_player.pause()
+
+	else:
+		player.set_process(true)
+		player.set_physics_process(true)
+		player.animation_player.play()
+
 func load_level(level_path: String) -> void:
 	# Unload current level
 	if level_root.get_child_count() > 0:

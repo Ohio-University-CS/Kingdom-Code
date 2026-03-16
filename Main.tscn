@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c72afabqs28gl" path="res://BlockManager/BlockManager.tscn" id="1_uu6xs"]
 
 [node name="Main" type="Node" unique_id=2008339237]
+process_mode = 3
 
 [node name="BlockManager" parent="." unique_id=2016715987 instance=ExtResource("1_uu6xs")]
 
