@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene format=4 uid="uid://bt228qgvt47it"]
+=======
+[gd_scene format=4 uid="uid://6mpv1wyr6cc4"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Texture2D" uid="uid://dcvokuih0nlfy" path="res://Sprites/Castle/background.png" id="1_folwd"]
 [ext_resource type="Texture2D" uid="uid://bi7fp8388kcko" path="res://Sprites/Castle/ground.png" id="2_mlekv"]

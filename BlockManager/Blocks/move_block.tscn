@@ -12,7 +12,7 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ta8l8"]
 size = Vector2(10, 7)
 
-[node name="MoveBlock" type="Node2D" unique_id=2139020209]
+[node name="MoveBlock" type="Node2D" unique_id=2139020209 groups=["MoveBlock"]]
 script = ExtResource("1_4whwm")
 
 [node name="MoveBlock" type="Sprite2D" parent="." unique_id=845344658]

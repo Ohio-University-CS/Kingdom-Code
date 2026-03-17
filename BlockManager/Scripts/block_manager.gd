@@ -1,5 +1,6 @@
 class_name BlockManager extends Node2D
 
+#current bugs, last block plays for twice as long, moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
 
 @onready var timer = $Timer
 var currentBlock = self
@@ -17,11 +18,13 @@ func _on_play_button_pressed() -> void:
 	IntermediaryMangager.playing = playing
 	$CanvasLayer/PausePlay.set_frame(playing)
 	if playing:
-		currentBlock = self
-		IntermediaryMangager.movementDirection = Vector2.ZERO
-		_on_timer_timeout()
-		timer.start()
-		
+		if currentBlock.nextNode != null:
+			currentBlock = self
+			IntermediaryMangager.movementDirection = Vector2.ZERO
+			_on_timer_timeout()
+			timer.start()
+		else:
+			_on_play_button_pressed()
 	else:
 		timer.stop()
 	
@@ -38,13 +41,10 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	if newParent is Sprite2D:
 		newParent = self
 
-	if newNode == newParent:
+	if newNode == newParent: #has yet to be used, can probably get removed
 		print("brokwnsuwu")
 		return
-	# Prevent cyclic parenting
-	#if newParent.is_ancestor_of(newNode):
-		#print("parent is the parent to new")
-		#return
+	
 	
 	if attachingArea.is_ancestor_of(newNode):
 		print("its already a kid")
@@ -68,11 +68,14 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 func _on_timer_timeout() -> void:
 	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self
+		currentBlock = self.nextNode
 	else:
 		currentBlock = currentBlock.nextNode
 	
-	if currentBlock.get_child(0).name == "MoveBlock":
+	print("running a block")
+	if currentBlock.is_in_group("MoveBlock"):
 		IntermediaryMangager.movementDirection = currentBlock._check_for_direction()
 		print(IntermediaryMangager.movementDirection)
+	else:
+		print("not detecting a block")
 	

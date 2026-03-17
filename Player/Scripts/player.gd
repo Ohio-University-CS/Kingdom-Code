@@ -24,5 +24,15 @@ func _physics_process(_delta: float) -> void:
 	
 	if IntermediaryMangager.playing == true:
 		#print("working", IntermediaryMangager.movementDirection * speed)
+<<<<<<< Updated upstream
 		velocity = IntermediaryMangager.movementDirection * speed
+=======
+		velocity.x = IntermediaryMangager.movementDirection.x * speed
+		if is_on_floor():
+			velocity.y = IntermediaryMangager.movementDirection.y * 400
+		else:
+			velocity.y += gravity
+			
+		# Keep the vertical velocity (gravity) separate
+>>>>>>> Stashed changes
 		move_and_slide()
