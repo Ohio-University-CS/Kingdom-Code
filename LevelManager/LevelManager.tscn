@@ -9,4 +9,3 @@ script = ExtResource("1_114q7")
 [node name="LevelRoot" type="Node2D" parent="." unique_id=1984015215]
 
 [node name="Player" parent="." unique_id=1410869650 instance=ExtResource("2_114q7")]
-scale = Vector2(0.25, 0.25)
