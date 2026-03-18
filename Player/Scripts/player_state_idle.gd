@@ -6,7 +6,7 @@ func enter() -> void:
 	pawn.animation_player.play("idle")
 
 func process_state(delta: float) -> State:
-	if IntermediaryMangager.movementDirection != Vector2.ZERO:
+	if EventBus.movementDirection != Vector2.ZERO:
 		return walk 
 
 	process_position(delta)

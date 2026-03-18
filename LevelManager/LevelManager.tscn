@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://56kfcf5xu6lc"]
 
-[ext_resource type="Script" uid="uid://tysor361mogg" path="res://LevelManager/Scripts/level_manager.gd" id="1_114q7"]
+[ext_resource type="Script" uid="uid://d1qgbq0fn222l" path="res://LevelManager/Scripts/level_manager.gd" id="1_114q7"]
 [ext_resource type="PackedScene" uid="uid://di2xvldh334da" path="res://Player/Player.tscn" id="2_114q7"]
 
 [node name="LevelManager" type="Node2D" unique_id=1447221417]

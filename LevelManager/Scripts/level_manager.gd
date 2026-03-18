@@ -11,7 +11,7 @@ func _ready() -> void:
 	load_level(current_level_path)
 
 func _process(_delta: float) -> void:
-	if IntermediaryMangager.playing == false:
+	if EventBus.playing == false:
 		player.set_process(false)
 		player.set_physics_process(false)
 		player.animation_player.pause()
