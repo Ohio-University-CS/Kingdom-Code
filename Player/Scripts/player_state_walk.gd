@@ -17,7 +17,7 @@ func process_position(_delta: float) -> void:
 	if not pawn.is_on_floor():
 		pawn.velocity.y += pawn.gravity
 	else:
-		pawn.velocity.y = 0
+		pawn.velocity.y = EventBus.movementDirection.y * 150 ## jump height
 
 	pawn.velocity.x = EventBus.movementDirection.x * pawn.speed
 	pawn.move_and_slide()
