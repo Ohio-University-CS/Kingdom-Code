@@ -1,6 +1,6 @@
 class_name BlockManager extends Node2D
 
-#current bugs, last block plays for twice as long, moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
+#current bugs, , moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
 
 @onready var timer = $Timer
 var currentBlock = self
@@ -22,13 +22,11 @@ func _on_play_button_pressed() -> void:
 	EventBus.playing = playing
 	$CanvasLayer/PausePlay.set_frame(playing)
 	if playing:
-		#if currentBlock.nextNode != null:
-		currentBlock = self
-		EventBus.movementDirection = Vector2.ZERO
-		_on_timer_timeout()
-		timer.start()
-		#else:
-			#_on_play_button_pressed()
+		if currentBlock.nextNode != null:
+			currentBlock = self
+			EventBus.movementDirection = Vector2.ZERO
+			_on_timer_timeout()
+			timer.start()
 	else:
 		timer.stop()
 	
