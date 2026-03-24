@@ -10,4 +10,5 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
-		state_machine.process_update(delta)
+	state_machine.process_update(delta)
+	global_position = global_position.round()

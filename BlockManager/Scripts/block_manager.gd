@@ -6,9 +6,18 @@ var currentBlock = self
 
 func _ready() -> void:
 	EventBus.block_added.connect(insert_after)
+	EventBus.level_loaded.connect(_on_level_loaded)
 	timer.wait_time = 0.5
 
 var playing = false
+
+func _on_level_loaded() -> void:
+	playing = false
+	IntermediaryMangager.playing = false
+	timer.stop()
+	currentBlock = self
+	$CanvasLayer/PausePlay.set_frame(0)
+
 func _on_play_button_pressed() -> void:
 	playing = !playing
 	#if blocks.size() == 0: #cannot play with zero blocks - ben

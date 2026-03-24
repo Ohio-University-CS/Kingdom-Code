@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://dr7fyw8e8b2f2"]
+
+[ext_resource type="Script" uid="uid://y0ldlrypb450" path="res://MainMenu/Scripts/main_menu.gd" id="1_yf1gm"]
+
+[node name="MainMenu" type="Control" unique_id=785503061]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yf1gm")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1316655417]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.12549, 0.188235, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1027449287]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1668286233]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1207228418]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1463356418]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=289195732]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Kingdom Code"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1573582564]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Program the knight's path."
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=41988128]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Checking saved game..."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=347741266]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1493905150]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Start New Game"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=46658632]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Load Game"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1315633259]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Quit"

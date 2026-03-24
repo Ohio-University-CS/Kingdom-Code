@@ -258,15 +258,14 @@ sources/1 = SubResource("TileSetAtlasSource_qc8g6")
 script = ExtResource("1_eue43")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=716162703]
-position = Vector2(14, 171)
+position = Vector2(11, 190)
 
 [node name="Background" type="ParallaxBackground" parent="." unique_id=647950584]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background" unique_id=2014595103]
-motion_scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxLayer" unique_id=2009653652]
-scale = Vector2(0.99014777, 0.96428573)
+position = Vector2(-3, -4)
 texture = ExtResource("2_wbw1h")
 centered = false
 

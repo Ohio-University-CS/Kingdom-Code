@@ -136,8 +136,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ysni"]
-radius = 11.0
-height = 62.0
+radius = 9.0
+height = 36.0
 
 [node name="Player" type="CharacterBody2D" unique_id=869857252]
 collision_layer = 2
@@ -147,18 +147,19 @@ script = ExtResource("1_q3lat")
 libraries/ = SubResource("AnimationLibrary_vlldt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1056352016]
+scale = Vector2(0.625, 0.625)
 texture = ExtResource("2_6ysni")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1554349010]
-position = Vector2(4, 0)
+position = Vector2(2, 0)
 shape = SubResource("CapsuleShape2D_6ysni")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=544691803]
 limit_left = 0
 limit_top = 0
-limit_right = 390
-limit_bottom = 280
+limit_right = 400
+limit_bottom = 272
 
 [node name="StateMachine" type="Node" parent="." unique_id=477855483]
 script = ExtResource("3_8g4oa")
