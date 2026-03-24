@@ -23,8 +23,8 @@ config/canvas_textures/default_texture_filter=0
 [autoload]
 
 EventBus="*res://Utilities/EventBus/event_bus.gd"
-IntermediaryMangager="*uid://bs5tfjxh2iles"
 SaveManager="*res://Utilities/Save/save_manager.gd"
+IntermediaryMangager="*uid://bk5l5mcdv512l"
 
 [display]
 
@@ -34,11 +34,11 @@ window/stretch/mode="viewport"
 
 [global_group]
 
+ConnectTo=""
 ConnectFrom=""
 ConnectAbove=""
 Attachment=""
 AttachTo=""
-ConnectTo=""
 
 [layer_names]
 
@@ -48,6 +48,6 @@ ConnectTo=""
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-textures/canvas_textures/default_texture_filter=0

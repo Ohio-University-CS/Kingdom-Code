@@ -46,6 +46,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LoadingScreen" type="CanvasLayer" parent="." unique_id=2000000004]
+visible = false
 
 [node name="Background" type="ColorRect" parent="LoadingScreen" unique_id=2000000005]
 grow_horizontal = 2
