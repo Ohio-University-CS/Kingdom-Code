@@ -35,10 +35,7 @@ func _on_play_button_pressed() -> void:
 		if currentBlock.nextNode != null:
 			currentBlock = self
 			EventBus.movementDirection = Vector2.ZERO
-			_on_timer_timeout()
-			timer.start()
-	else:
-		timer.stop()
+			EventBus.next_block.emit()
 	
 
 
@@ -79,39 +76,39 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
-func _on_timer_timeout() -> void:
-	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self.nextNode
-		if !self.nextNode:
-			return
-	else:
-		currentBlock = currentBlock.nextNode
-	var player = get_parent().get_child(1).get_child(1)
-	
-	#print("running a block ", currentBlock.name)
-	if currentBlock.is_in_group("MoveBlock"):
-		EventBus.movementDirection = currentBlock._check_for_direction()
-		print(player.global_position.x - testing)
-		testing = player.global_position.x
-		#print(EventBus.movementDirection)
-	else:
-		print("not detecting a block ", currentBlock.name)
-	
+#func _on_timer_timeout() -> void:
+	#if currentBlock.nextNode == null: #loops the code blocks
+		#currentBlock = self.nextNode
+		#if !self.nextNode:
+			#return
+	#else:
+		#currentBlock = currentBlock.nextNode
+	#var player = get_parent().get_child(1).get_child(1)
+	#
+	##print("running a block ", currentBlock.name)
+	#if currentBlock.is_in_group("MoveBlock"):
+		#EventBus.movementDirection = currentBlock._check_for_direction()
+		#print(player.global_position.x - testing)
+		#testing = player.global_position.x
+		##print(EventBus.movementDirection)
+	#else:
+		#print("not detecting a block ", currentBlock.name)
+	#
 
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self.nextNode
-		if !self.nextNode:
-			return
+		currentBlock = self
+		_on_play_button_pressed()
+		return
 	else:
 		currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
 	
-	#print("running a block ", currentBlock.name)
+	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
-		print(player.global_position.x - testing)
+		#print(player.global_position.x - testing)
 		testing = player.global_position.x
-		#print(EventBus.movementDirection)
+		print(EventBus.movementDirection)
 	else:
 		print("not detecting a block ", currentBlock.name)
