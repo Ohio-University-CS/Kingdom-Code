@@ -69,13 +69,13 @@ func _on_connect_to_next_detector_area_exited(area: Area2D) -> void:
 
 func _check_for_direction():
 	if has_node("RightBlock"):
-		print("Direction is right", Vector2.RIGHT)
+		#print("Direction is right", Vector2.RIGHT)
 		return Vector2.RIGHT
 	elif has_node("LeftBlock"):
-		print("Direction is right", Vector2.RIGHT)
+		#print("Direction is right", Vector2.RIGHT)
 		return Vector2.LEFT
 	elif has_node("UpBlock"):
-		print("Direction is right", Vector2.RIGHT)
+		#print("Direction is right", Vector2.RIGHT)
 		return Vector2.UP
 	return Vector2.ZERO
 

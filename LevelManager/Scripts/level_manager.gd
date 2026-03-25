@@ -16,7 +16,7 @@ var _level_complete_armed: bool = false
 var _level_load_id: int = 0
 
 func _ready() -> void:
-	back_to_menu_button.pressed.connect(_on_back_to_menu_pressed)
+	#back_to_menu_button.pressed.connect(_on_back_to_menu_pressed)
 	current_level_path = save_manager.consume_pending_level_path(current_level_path)
 	load_level(current_level_path)
 
@@ -52,7 +52,7 @@ func load_level(level_path: String) -> void:
 		_level_load_id += 1
 		_arm_level_complete(_level_load_id)
 
-	loading_screen.visible = false
+	#loading_screen.visible = false
 	EventBus.level_loaded.emit()
 
 func _arm_level_complete(load_id: int) -> void:
@@ -92,7 +92,7 @@ func _on_level_complete(body: Node2D) -> void:
 	var next_path := current_level.next_level_path
 
 	# Pause the game
-	IntermediaryMangager.playing = false
+	EventBus.playing = false
 
 	# Show congratulations screen
 	congrats_screen.visible = true
@@ -107,5 +107,5 @@ func _on_level_complete(body: Node2D) -> void:
 	_transitioning = false
 
 func _on_back_to_menu_pressed() -> void:
-	IntermediaryMangager.playing = false
+	EventBus.playing = false
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
