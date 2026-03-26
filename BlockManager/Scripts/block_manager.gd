@@ -13,14 +13,12 @@ func _ready() -> void:
 	EventBus.block_added.connect(insert_after)
 	EventBus.level_loaded.connect(_on_level_loaded)
 	EventBus.next_block.connect(go_next)
-	timer.wait_time = 0.5
 
 var playing = false
 
 func _on_level_loaded() -> void:
 	playing = false
 	EventBus.playing = false
-	timer.stop()
 	currentBlock = self
 	$CanvasLayer/PausePlay.set_frame(0)
 
@@ -76,25 +74,6 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
-#func _on_timer_timeout() -> void:
-	#if currentBlock.nextNode == null: #loops the code blocks
-		#currentBlock = self.nextNode
-		#if !self.nextNode:
-			#return
-	#else:
-		#currentBlock = currentBlock.nextNode
-	#var player = get_parent().get_child(1).get_child(1)
-	#
-	##print("running a block ", currentBlock.name)
-	#if currentBlock.is_in_group("MoveBlock"):
-		#EventBus.movementDirection = currentBlock._check_for_direction()
-		#print(player.global_position.x - testing)
-		#testing = player.global_position.x
-		##print(EventBus.movementDirection)
-	#else:
-		#print("not detecting a block ", currentBlock.name)
-	#
-
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
 		currentBlock = self
