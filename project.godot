@@ -24,13 +24,16 @@ config/canvas_textures/default_texture_filter=0
 
 EventBus="*res://Utilities/EventBus/event_bus.gd"
 SaveManager="*res://Utilities/Save/save_manager.gd"
-IntermediaryMangager="*uid://bk5l5mcdv512l"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=240
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [global_group]
 

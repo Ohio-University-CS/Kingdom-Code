@@ -21,7 +21,7 @@ func _ready() -> void:
 	load_level(current_level_path)
 
 func _process(_delta: float) -> void:
-	if IntermediaryMangager.playing == false:
+	if EventBus.playing == false:
 		player.set_process(false)
 		player.set_physics_process(false)
 		player.animation_player.pause()
@@ -92,7 +92,7 @@ func _on_level_complete(body: Node2D) -> void:
 	var next_path := current_level.next_level_path
 
 	# Pause the game
-	IntermediaryMangager.playing = false
+	EventBus.playing = false
 
 	# Show congratulations screen
 	congrats_screen.visible = true
@@ -107,5 +107,5 @@ func _on_level_complete(body: Node2D) -> void:
 	_transitioning = false
 
 func _on_back_to_menu_pressed() -> void:
-	IntermediaryMangager.playing = false
+	EventBus.playing = false
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
