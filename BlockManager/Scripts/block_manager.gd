@@ -79,8 +79,7 @@ func go_next():
 		currentBlock = self
 		_on_play_button_pressed()
 		return
-	else:
-		currentBlock = currentBlock.nextNode
+	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
 	
 	print("running a block ", currentBlock.name)

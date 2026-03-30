@@ -26,14 +26,11 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
 		velocity.y += gravity
-		print("falling")
 	else:
-		velocity.y = EventBus.movementDirection.y * 150 ## jump height
-		if velocity.y != -1:
-			EventBus.next_block.emit()
-
-	#velocity.x = EventBus.movementDirection.x * speed
-	#move_and_slide()
+		if EventBus.movementDirection.y != 0:
+			velocity.y = EventBus.movementDirection.y * 150 ## jump height
+			EventBus.next_block.emit() #Goes to next block directly after starting the jump
+			return
 	
 	if (start < distance_to_move and EventBus.movementDirection.x == 1) or (start > distance_to_move and EventBus.movementDirection.x == -1):
 		velocity.x = EventBus.movementDirection.x * speed
@@ -42,7 +39,6 @@ func _physics_process(delta: float) -> void:
 		start = global_position.x
 	else:
 		velocity.x = 0
-		if EventBus.movementDirection.y != -1:
-			EventBus.next_block.emit()
+		EventBus.next_block.emit()
 	
 	
