@@ -21,7 +21,8 @@ func _on_play_button_pressed() -> void:
 		#playing = false
 	print("playing", playing)
 	EventBus.playing = playing
-	$CanvasLayer/PausePlay.set_frame(playing)
+	if has_node("CanvasLayer/PausePlay"):
+		$CanvasLayer/PausePlay.set_frame(playing)
 	if playing:
 		if currentBlock.nextNode != null:
 			currentBlock = self
@@ -68,6 +69,8 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		newNode.nextNode.call_deferred("_update_position")
 
 func _on_timer_timeout() -> void:
+	if nextNode == null:
+		return
 	if currentBlock.nextNode == null: #loops the code blocks
 		currentBlock = self.nextNode
 		if !self.nextNode:
@@ -88,4 +91,5 @@ func _on_level_loaded() -> void:
 	EventBus.playing = false
 	timer.stop()
 	currentBlock = self
-	$CanvasLayer/PausePlay.set_frame(0)
+	if has_node("CanvasLayer/PausePlay"):
+		$CanvasLayer/PausePlay.set_frame(0)
