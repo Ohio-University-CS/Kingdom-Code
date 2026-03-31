@@ -34,11 +34,10 @@ func _physics_process(delta: float) -> void:
 	
 	if (start < distance_to_move and EventBus.movementDirection.x == 1) or (start > distance_to_move and EventBus.movementDirection.x == -1):
 		velocity.x = EventBus.movementDirection.x * speed
-		move_and_slide()
 		
 		start = global_position.x
 	else:
 		velocity.x = 0
 		EventBus.next_block.emit()
-	
+	move_and_slide()
 	
