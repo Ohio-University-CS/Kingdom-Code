@@ -12,9 +12,16 @@ var nextNode = null
 func _ready() -> void:
 	EventBus.block_added.connect(insert_after)
 	EventBus.level_loaded.connect(_on_level_loaded)
-	timer.wait_time = 0.5
+	EventBus.next_block.connect(go_next)
 
 var playing = false
+
+func _on_level_loaded() -> void:
+	playing = false
+	EventBus.playing = false
+	currentBlock = self
+	$CanvasLayer/PausePlay.set_frame(0)
+
 func _on_play_button_pressed() -> void:
 	playing = !playing
 	#if blocks.size() == 0: #cannot play with zero blocks - ben
@@ -27,10 +34,7 @@ func _on_play_button_pressed() -> void:
 		if currentBlock.nextNode != null:
 			currentBlock = self
 			EventBus.movementDirection = Vector2.ZERO
-			_on_timer_timeout()
-			timer.start()
-	else:
-		timer.stop()
+			EventBus.next_block.emit()
 	
 
 
@@ -53,13 +57,13 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		return
 	
 	if !newParent.nextNode:
-		print("parented to bottom")
+		#print("parented to bottom")
 		newNode.call_deferred("reparent", attachingArea)
 		newNode.lastNode = newParent
 		newParent.nextNode = newNode
-		print("new node is ", newNode)
+		#print("new node is ", newNode)
 	else:
-		print("parented in the middles")
+		#print("parented in the middles")
 		newNode.call_deferred("reparent", attachingArea)
 		newNode.lastNode = newParent
 		newNode.nextNode = newParent.nextNode
@@ -68,28 +72,22 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		newNode.nextNode.call_deferred("reparent", newNode.get_child(5))
 		newNode.nextNode.call_deferred("_update_position")
 
-func _on_timer_timeout() -> void:
-	if nextNode == null:
-		return
+
+
+var testing = 0
+func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self.nextNode
-		if !self.nextNode:
-			return
-	else:
-		currentBlock = currentBlock.nextNode
+		currentBlock = self
+		_on_play_button_pressed()
+		return
+	currentBlock = currentBlock.nextNode
+	var player = get_parent().get_child(1).get_child(1)
 	
 	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
+		#print(player.global_position.x - testing)
+		testing = player.global_position.x
 		print(EventBus.movementDirection)
 	else:
 		print("not detecting a block ", currentBlock.name)
-	
-
-func _on_level_loaded() -> void:
-	playing = false
-	EventBus.playing = false
-	timer.stop()
-	currentBlock = self
-	if has_node("CanvasLayer/PausePlay"):
-		$CanvasLayer/PausePlay.set_frame(0)
