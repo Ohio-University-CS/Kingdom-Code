@@ -28,7 +28,8 @@ func _on_play_button_pressed() -> void:
 		#playing = false
 	print("playing", playing)
 	EventBus.playing = playing
-	$CanvasLayer/PausePlay.set_frame(playing)
+	if has_node("CanvasLayer/PausePlay"):
+		$CanvasLayer/PausePlay.set_frame(playing)
 	if playing:
 		if currentBlock.nextNode != null:
 			currentBlock = self
