@@ -7,3 +7,4 @@ https://arw0046.itch.io/kingdom-code
 
 ## Download
 Download from Github Release:
+https://github.com/Ohio-University-CS/Kingdom-Code/releases/tag/v1.0.0
