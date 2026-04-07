@@ -52,7 +52,7 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		return
 	if attachingArea.is_ancestor_of(newNode):
 		print("its already a kid")
-		return
+		newNode.reparent(get_tree().current_scene.get_child(0).get_child(0)) ## changes parent to the canvas layer temporarally
 	
 	
 	if newNode.lastNode:
@@ -118,4 +118,5 @@ func go_next():
 
 
 func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block
-	EventBus.next_block.emit()
+	if EventBus.playing:
+		EventBus.next_block.emit()
