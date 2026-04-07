@@ -46,6 +46,8 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	var newParent = attachingArea.get_parent()
 	if newParent is Sprite2D:
 		newParent = self
+	#if newParent.has:
+		#print("error did not correctly get parent, ", newParent, " is not the parent of ", newNode)
 
 	if newNode == newParent: #has yet to be used, can probably get removed
 		print("brokwnsuwu")
@@ -56,21 +58,41 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 		print("its already a kid")
 		return
 	
-	if !newParent.nextNode:
-		#print("parented to bottom")
-		newNode.reparent(attachingArea)
-		newNode.lastNode = newParent
-		newParent.nextNode = newNode
-		#print("new node is ", newNode)
-	else:
-		#print("parented in the middles")
-		newNode.reparent(attachingArea)
-		newNode.lastNode = newParent
-		newNode.nextNode = newParent.nextNode
-		newParent.nextNode = newNode
-		newNode.nextNode.lastNode = newNode
-		newNode.nextNode.reparent(newNode.get_child(5))
-		newNode.nextNode.call_deferred("_update_position")
+	if newNode.lastNode:
+		newNode.lastNode.nextNode = null
+	
+	var oldNext = null # gets the old next incase putting a block in the middle
+	if newParent.nextNode != null:
+		oldNext = newParent.nextNode
+	
+	newParent.nextNode = newNode #changing all of the paths
+	newNode.lastNode = newParent
+	newNode.nextNode = oldNext
+	if oldNext: #incase it doesn't exist
+		oldNext.lastNode = newNode
+	
+	
+	newNode.call_deferred("reparent", attachingArea) #reparrenting everything ## calling deffered so that it runs after other nodes unparent themselves
+	newNode.global_position = attachingArea.global_position
+	if oldNext:
+		oldNext.call_deferred("reparent", newNode.get_child(5)) # 5 5 is the attaching area
+		oldNext.global_position = newNode.get_child(5).global_position
+	
+	#if !newParent.nextNode:
+		##print("parented to bottom")
+		#newNode.reparent(attachingArea)
+		#newNode.lastNode = newParent
+		#newParent.nextNode = newNode
+		##print("new node is ", newNode)
+	#else:
+		##print("parented in the middles")
+		#newNode.reparent(attachingArea)
+		#newNode.lastNode = newParent
+		#newNode.nextNode = newParent.nextNode
+		#newParent.nextNode = newNode
+		#newNode.nextNode.lastNode = newNode
+		#newNode.nextNode.reparent(newNode.get_child(5))
+		#newNode.nextNode.call_deferred("_update_position")
 
 
 
