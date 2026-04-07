@@ -43,7 +43,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [5]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -112,7 +112,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -177,8 +177,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ysni"]
-radius = 9.0
-height = 36.0
+radius = 8.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=869857252]
 collision_layer = 2
@@ -189,12 +189,12 @@ script = ExtResource("1_q3lat")
 libraries/ = SubResource("AnimationLibrary_vlldt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1056352016]
+position = Vector2(-1.9999999, -0.9999999)
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("2_6ysni")
-hframes = 4
+hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1554349010]
-position = Vector2(2, 0)
 shape = SubResource("CapsuleShape2D_6ysni")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=544691803]
@@ -213,9 +213,9 @@ script = ExtResource("4_6ysni")
 script = ExtResource("5_vlldt")
 
 [node name="LeftCast" type="RayCast2D" parent="." unique_id=1275926233]
-position = Vector2(-7, 0)
+position = Vector2(-8, 0)
 target_position = Vector2(-48, 0)
 
 [node name="RightCast" type="RayCast2D" parent="." unique_id=1631193963]
-position = Vector2(11, 0)
+position = Vector2(8, 0)
 target_position = Vector2(48, 0)

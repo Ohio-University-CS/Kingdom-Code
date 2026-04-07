@@ -111,6 +111,7 @@ func go_next():
 			player.global_position.x += newPos.x
 		else:
 			player.global_position.x += 48 * EventBus.movementDirection.x #size of raycast, change if target position changes
+		player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		return
 	else:
