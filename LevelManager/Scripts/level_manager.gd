@@ -22,12 +22,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if EventBus.playing == false:
-		player.set_process(false)
-		player.set_physics_process(false)
+		#player.set_process(false)
+		#player.set_physics_process(false)
 		player.animation_player.pause()
 	else:
-		player.set_process(true)
-		player.set_physics_process(true)
+		#player.set_process(true)
+		#player.set_physics_process(true)
 		player.animation_player.play()
 
 func load_level(level_path: String) -> void:

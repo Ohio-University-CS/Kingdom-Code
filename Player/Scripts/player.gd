@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		if EventBus.movementDirection.y != 0:
 			velocity.y = EventBus.movementDirection.y * 150 ## jump height
+			
 			EventBus.next_block.emit() #Goes to next block directly after starting the jump
 			return
 	
@@ -36,8 +37,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = EventBus.movementDirection.x * speed
 		
 		start = global_position.x
+	elif ((start < distance_to_move and EventBus.movementDirection.x == 2) or (start > distance_to_move and EventBus.movementDirection.x == -2)) and EventBus.playing == true:
+		pass
 	else:
 		velocity.x = 0
-		EventBus.next_block.emit()
+		#velocity.y += gravity
+		if EventBus.playing == true:
+			EventBus.next_block.emit()
+	
+	if EventBus.playing == false:
+		velocity.x = 0
 	move_and_slide()
 	

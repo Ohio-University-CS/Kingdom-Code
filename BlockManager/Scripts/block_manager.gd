@@ -3,6 +3,7 @@ class_name BlockManager extends Node2D
 #current bugs, , moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
 var currentBlock = self
 
+@onready var errorTimer = $ErrorTimer
 
 var lastNode = null
 var nextNode = null
@@ -32,7 +33,8 @@ func _on_play_button_pressed() -> void:
 		if currentBlock.nextNode != null:
 			currentBlock = self
 			EventBus.movementDirection = Vector2.ZERO
-			EventBus.next_block.emit()
+			go_next()
+			#print("test")
 	
 
 
@@ -56,18 +58,18 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	
 	if !newParent.nextNode:
 		#print("parented to bottom")
-		newNode.call_deferred("reparent", attachingArea)
+		newNode.reparent(attachingArea)
 		newNode.lastNode = newParent
 		newParent.nextNode = newNode
 		#print("new node is ", newNode)
 	else:
 		#print("parented in the middles")
-		newNode.call_deferred("reparent", attachingArea)
+		newNode.reparent(attachingArea)
 		newNode.lastNode = newParent
 		newNode.nextNode = newParent.nextNode
 		newParent.nextNode = newNode
 		newNode.nextNode.lastNode = newNode
-		newNode.nextNode.call_deferred("reparent", newNode.get_child(5))
+		newNode.nextNode.reparent(newNode.get_child(5))
 		newNode.nextNode.call_deferred("_update_position")
 
 
@@ -75,17 +77,36 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 var testing = 0
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self
+		
 		_on_play_button_pressed()
-		return
+		#print(currentBlock)
+		if currentBlock.nextNode == null:
+			currentBlock = self
+			return
 	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
-	
+	errorTimer.start()
 	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		#print(player.global_position.x - testing)
 		testing = player.global_position.x
 		print(EventBus.movementDirection)
+	elif currentBlock.is_in_group("DashBlock"):
+		EventBus.movementDirection = currentBlock._check_for_direction()
+		var raycast = player.get_child(5) #raycast position leftcast
+		if EventBus.movementDirection == Vector2.RIGHT:
+			raycast = player.get_child(6) #raycast position leftcast
+		if raycast.is_colliding():
+			var newPos = abs(raycast.global_position - raycast.get_collision_point()) * EventBus.movementDirection.x #dist to move
+			player.global_position.x += newPos.x
+		else:
+			player.global_position.x += 48 * EventBus.movementDirection.x #size of raycast, change if target position changes
+		EventBus.next_block.emit()
+		return
 	else:
 		print("not detecting a block ", currentBlock.name)
+
+
+func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block
+	EventBus.next_block.emit()
