@@ -29,8 +29,9 @@ func _on_button_button_up() -> void:
 		tmpParent = tmpParent.get_parent().get_parent()
 		print("current parent is ", tmpParent)
 	if tmpParent.get("nextNode"):
-		tmpParent.nextNode = null
-		print("fully detached from ", tmpParent)
+		if tmpParent.nextNode == self:
+			tmpParent.nextNode = null
+			print(self, " fully detached from ", tmpParent)
 	
 	
 	call_deferred("reparent", get_tree().current_scene.get_child(0).get_child(0)) #reattached node to canvasLayer
@@ -39,8 +40,9 @@ func _on_button_button_up() -> void:
 	if connectToBlock != null:
 		global_position = connectToBlock
 		if blockAttachingTo != null:
-			EventBus.block_added.emit(self, blockAttachingTo)
-			print("added to list")
+			if lastNode == null:
+				EventBus.block_added.emit(self, blockAttachingTo)
+				print("added to list")
 
 
 func _on_connect_to_last_detector_area_entered(area: Area2D) -> void:

@@ -1,6 +1,5 @@
 class_name BlockManager extends Node2D
 
-#current bugs, , moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
 var currentBlock = self
 
 @onready var errorTimer = $ErrorTimer
@@ -46,28 +45,32 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	var newParent = attachingArea.get_parent()
 	if newParent is Sprite2D:
 		newParent = self
-	#if newParent.has:
-		#print("error did not correctly get parent, ", newParent, " is not the parent of ", newNode)
-
+		#print("blockmanager old next node should be ", nextNode)
+	
 	if newNode == newParent: #has yet to be used, can probably get removed
 		print("brokwnsuwu")
 		return
-	
-	
 	if attachingArea.is_ancestor_of(newNode):
 		print("its already a kid")
 		return
+	
 	
 	if newNode.lastNode:
 		newNode.lastNode.nextNode = null
 	
 	var oldNext = null # gets the old next incase putting a block in the middle
 	if newParent.nextNode != null:
+		print("calling oldNext")
 		oldNext = newParent.nextNode
+	
+	var newBottomNode = newNode ##newBottomNode is the lowest node in the added stack of newNode, the oldNext should attach to the bottom of this
+	while newBottomNode.nextNode: #if adding more than one node this gets the bottom, else its the same as newNode
+		newBottomNode = newBottomNode.nextNode
 	
 	newParent.nextNode = newNode #changing all of the paths
 	newNode.lastNode = newParent
-	newNode.nextNode = oldNext
+	newBottomNode.nextNode = oldNext
+	print("old next is", oldNext)
 	if oldNext: #incase it doesn't exist
 		oldNext.lastNode = newNode
 	
@@ -75,25 +78,9 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	newNode.call_deferred("reparent", attachingArea) #reparrenting everything ## calling deffered so that it runs after other nodes unparent themselves
 	newNode.global_position = attachingArea.global_position
 	if oldNext:
-		oldNext.call_deferred("reparent", newNode.get_child(5)) # 5 5 is the attaching area
-		oldNext.global_position = newNode.get_child(5).global_position
+		oldNext.call_deferred("reparent", newBottomNode.get_child(5)) #  5 is the attaching area
+		oldNext.global_position = newBottomNode.get_child(5).global_position
 	
-	#if !newParent.nextNode:
-		##print("parented to bottom")
-		#newNode.reparent(attachingArea)
-		#newNode.lastNode = newParent
-		#newParent.nextNode = newNode
-		##print("new node is ", newNode)
-	#else:
-		##print("parented in the middles")
-		#newNode.reparent(attachingArea)
-		#newNode.lastNode = newParent
-		#newNode.nextNode = newParent.nextNode
-		#newParent.nextNode = newNode
-		#newNode.nextNode.lastNode = newNode
-		#newNode.nextNode.reparent(newNode.get_child(5))
-		#newNode.nextNode.call_deferred("_update_position")
-
 
 
 var testing = 0
