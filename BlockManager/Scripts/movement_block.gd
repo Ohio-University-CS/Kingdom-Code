@@ -29,8 +29,9 @@ func _on_button_button_up() -> void:
 		tmpParent = tmpParent.get_parent().get_parent()
 		print("current parent is ", tmpParent)
 	if tmpParent.get("nextNode"):
-		tmpParent.nextNode = null
-		print("fully detached from ", tmpParent)
+		if tmpParent.nextNode == self:
+			tmpParent.nextNode = null
+			print(self, " fully detached from ", tmpParent)
 	
 	
 	call_deferred("reparent", get_tree().current_scene.get_child(0).get_child(0)) #reattached node to canvasLayer
@@ -39,8 +40,9 @@ func _on_button_button_up() -> void:
 	if connectToBlock != null:
 		global_position = connectToBlock
 		if blockAttachingTo != null:
-			EventBus.block_added.emit(self, blockAttachingTo)
-			print("added to list")
+			if lastNode == null:
+				EventBus.block_added.emit(self, blockAttachingTo)
+				print("added to list")
 
 
 func _on_connect_to_last_detector_area_entered(area: Area2D) -> void:
@@ -67,17 +69,26 @@ func _on_connect_to_next_detector_area_exited(area: Area2D) -> void:
 		pass
 	
 
+var directionNode = null
 func _check_for_direction():
 	if has_node("RightBlock"):
-		#print("Direction is right", Vector2.RIGHT)
+		directionNode = get_node("RightBlock")
 		return Vector2.RIGHT
 	elif has_node("LeftBlock"):
-		#print("Direction is right", Vector2.RIGHT)
+		directionNode = get_node("LeftBlock")
 		return Vector2.LEFT
 	elif has_node("UpBlock"):
-		#print("Direction is right", Vector2.RIGHT)
+		directionNode = get_node("UpBlock")
 		return Vector2.UP
 	return Vector2.ZERO
+
+func _check_for_multiplier():
+	if directionNode.has_node("MultiplierBlock"):
+		print("found it")
+		var cycles = directionNode.get_node("MultiplierBlock").cycles
+		return cycles
+	print("didnt find the multiplier block")
+	return 1;
 
 func _update_position():
 	position = Vector2.ZERO

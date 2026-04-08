@@ -1,8 +1,8 @@
 class_name BlockManager extends Node2D
 
-#current bugs, , moving the blocks in a certain way makes the code stop detecting them ( this is because the stating block sometimes doesnt have a nextnode when it should, blocks cannot be inserted as the start of the stack when a block is alreadty there. up block does not work
 var currentBlock = self
 
+@onready var errorTimer = $ErrorTimer
 
 var lastNode = null
 var nextNode = null
@@ -32,7 +32,8 @@ func _on_play_button_pressed() -> void:
 		if currentBlock.nextNode != null:
 			currentBlock = self
 			EventBus.movementDirection = Vector2.ZERO
-			EventBus.next_block.emit()
+			go_next()
+			#print("test")
 	
 
 
@@ -44,48 +45,108 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 	var newParent = attachingArea.get_parent()
 	if newParent is Sprite2D:
 		newParent = self
-
+		#print("blockmanager old next node should be ", nextNode)
+	
 	if newNode == newParent: #has yet to be used, can probably get removed
 		print("brokwnsuwu")
 		return
-	
-	
 	if attachingArea.is_ancestor_of(newNode):
 		print("its already a kid")
-		return
+		newNode.reparent(get_tree().current_scene.get_child(0).get_child(0)) ## changes parent to the canvas layer temporarally
 	
-	if !newParent.nextNode:
-		#print("parented to bottom")
-		newNode.call_deferred("reparent", attachingArea)
-		newNode.lastNode = newParent
-		newParent.nextNode = newNode
-		#print("new node is ", newNode)
-	else:
-		#print("parented in the middles")
-		newNode.call_deferred("reparent", attachingArea)
-		newNode.lastNode = newParent
-		newNode.nextNode = newParent.nextNode
-		newParent.nextNode = newNode
-		newNode.nextNode.lastNode = newNode
-		newNode.nextNode.call_deferred("reparent", newNode.get_child(5))
-		newNode.nextNode.call_deferred("_update_position")
-
+	
+	if newNode.lastNode:
+		newNode.lastNode.nextNode = null
+	
+	var oldNext = null # gets the old next incase putting a block in the middle
+	if newParent.nextNode != null:
+		print("calling oldNext")
+		oldNext = newParent.nextNode
+	
+	var newBottomNode = newNode ##newBottomNode is the lowest node in the added stack of newNode, the oldNext should attach to the bottom of this
+	while newBottomNode.nextNode: #if adding more than one node this gets the bottom, else its the same as newNode
+		newBottomNode = newBottomNode.nextNode
+	
+	newParent.nextNode = newNode #changing all of the paths
+	newNode.lastNode = newParent
+	newBottomNode.nextNode = oldNext
+	print("old next is", oldNext)
+	if oldNext: #incase it doesn't exist
+		oldNext.lastNode = newNode
+	
+	
+	newNode.call_deferred("reparent", attachingArea) #reparrenting everything ## calling deffered so that it runs after other nodes unparent themselves
+	newNode.global_position = attachingArea.global_position
+	if oldNext:
+		oldNext.call_deferred("reparent", newBottomNode.get_child(5)) #  5 is the attaching area
+		oldNext.global_position = newBottomNode.get_child(5).global_position
+	
 
 
 var testing = 0
+#var cycles = 0
+#var checkedForCycles = false
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
-		currentBlock = self
+		if currentBlock.has_node("Star"): 
+			currentBlock.get_node("Star").visible = false #removing star when ended
 		_on_play_button_pressed()
-		return
+		#print(currentBlock)
+		if currentBlock.nextNode == null:
+			currentBlock = self
+			return
 	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
+	
+	if currentBlock.has_node("Star"): # puts a star next to the running node
+		currentBlock.get_node("Star").visible = true
+	if currentBlock.lastNode:
+		if currentBlock.lastNode.has_node("Star"):
+			currentBlock.lastNode.get_node("Star").visible = false
 	
 	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		#print(player.global_position.x - testing)
+		EventBus.multiplier = currentBlock._check_for_multiplier()
 		testing = player.global_position.x
 		print(EventBus.movementDirection)
+		
+		EventBus.next_block_two.emit() ## calls for player to get pos to move to
+		
+		#if !checkedForCycles:
+			#cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
+			#print("counting the amount of cycles, ", cycles)
+			#checkedForCycles = true
+		#if cycles > 1:
+			#print("tell code to run the code again")
+			#currentBlock = currentBlock.lastNode
+			#cycles -= 1
+		#else:
+			#print("done running the code")
+			#checkedForCycles = false
+			#cycles = 0
+		
+		
+	elif currentBlock.is_in_group("DashBlock"):
+		EventBus.movementDirection = currentBlock._check_for_direction()
+		var raycast = player.get_child(5) #raycast position leftcast
+		if EventBus.movementDirection == Vector2.RIGHT:
+			raycast = player.get_child(6) #raycast position leftcast
+		if raycast.is_colliding():
+			var newPos = abs(raycast.global_position - raycast.get_collision_point()) * EventBus.movementDirection.x #dist to move
+			player.global_position.x += newPos.x
+		else:
+			player.global_position.x += 48 * EventBus.movementDirection.x #size of raycast, change if target position changes
+		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
+		EventBus.next_block.emit()
+		
 	else:
 		print("not detecting a block ", currentBlock.name)
+	errorTimer.wait_time = 1 * EventBus.multiplier
+	errorTimer.start()
+
+
+func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block
+	if EventBus.playing:
+		EventBus.next_block.emit()

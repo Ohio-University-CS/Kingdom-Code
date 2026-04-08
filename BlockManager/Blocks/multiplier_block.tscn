@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c87qdd58oipb3"]
+
+[ext_resource type="Script" uid="uid://c43t4jgf5r8i7" path="res://BlockManager/Scripts/multiplier_block.gd" id="1_aid2h"]
+[ext_resource type="Texture2D" uid="uid://bxcxql5olwfd4" path="res://Sprites/Blocks/Multiplier.png" id="1_ybqf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aid2h"]
+size = Vector2(2, 2)
+
+[node name="MultiplierBlock" type="Node2D" unique_id=1696532912]
+script = ExtResource("1_aid2h")
+
+[node name="MultiplierBlock" type="Sprite2D" parent="." unique_id=2027615658]
+position = Vector2(15, 5)
+texture = ExtResource("1_ybqf3")
+hframes = 2
+vframes = 8
+
+[node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=305946702 groups=["ConnectFrom", "RightBlock"]]
+position = Vector2(1, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToLastDetector" unique_id=1438145936]
+shape = SubResource("RectangleShape2D_aid2h")
+
+[node name="Button" type="Button" parent="." unique_id=83914515]
+modulate = Color(1, 1, 1, 0)
+offset_left = -2.0
+offset_right = 31.0
+offset_bottom = 10.0
+action_mode = 0
+
+[node name="Center" type="Node2D" parent="." unique_id=51547366]
+position = Vector2(14, 5)
+
+[node name="ClickTimer" type="Timer" parent="." unique_id=200701298]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
+[connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]
+[connection signal="area_exited" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="timeout" from="ClickTimer" to="." method="_on_click_timer_timeout"]

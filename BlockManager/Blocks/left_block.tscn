@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2u0lc"]
 size = Vector2(2, 2)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6e4d"]
+size = Vector2(10, 10)
+
 [node name="LeftBlock" type="Node2D" unique_id=1483720473]
 script = ExtResource("1_444bn")
 
@@ -29,6 +32,13 @@ action_mode = 0
 
 [node name="Center" type="Node2D" parent="." unique_id=601307753]
 position = Vector2(14, 5)
+
+[node name="ConnectToNextDetector" type="Area2D" parent="." unique_id=1524754985 groups=["ConnectTo"]]
+position = Vector2(25, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToNextDetector" unique_id=1936743441]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_k6e4d")
 
 [connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]
 [connection signal="area_exited" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_exited"]
