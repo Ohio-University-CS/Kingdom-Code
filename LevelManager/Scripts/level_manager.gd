@@ -17,7 +17,8 @@ var _transitioning: bool = false
 var _level_complete_armed: bool = false
 var _death_armed: bool = false
 var _level_load_id: int = 0
-var _death_area: Area2D = null
+var _death_areas: Array[Area2D] = []
+var _death_bodies: Array[PhysicsBody2D] = []
 
 func _ready() -> void:
 	back_to_menu_button.pressed.connect(_on_back_to_menu_pressed)
@@ -33,6 +34,12 @@ func _process(_delta: float) -> void:
 		#player.set_process(true)
 		#player.set_physics_process(true)
 		player.animation_player.play()
+
+func _physics_process(_delta: float) -> void:
+	if _transitioning or not _death_armed:
+		return
+	if _is_touching_any_death_body():
+		_on_player_death(player)
 
 func load_level(level_path: String) -> void:
 	# Unload current level
@@ -52,9 +59,11 @@ func load_level(level_path: String) -> void:
 		if not current_level.level_complete_area.body_entered.is_connected(_on_level_complete):
 			current_level.level_complete_area.body_entered.connect(_on_level_complete)
 
-		_death_area = current_level.get_node_or_null("Death") as Area2D
-		if _death_area and not _death_area.body_entered.is_connected(_on_player_death):
-			_death_area.body_entered.connect(_on_player_death)
+		_death_areas = _find_death_areas(current_level)
+		_death_bodies = _find_death_bodies(current_level)
+		for death_area in _death_areas:
+			if not death_area.body_entered.is_connected(_on_player_death):
+				death_area.body_entered.connect(_on_player_death)
 
 		# Arm completion only after level settles and player is clear of the finish area.
 		_level_complete_armed = false
@@ -65,6 +74,35 @@ func load_level(level_path: String) -> void:
 
 	loading_screen.visible = false
 	EventBus.level_loaded.emit()
+
+func _find_death_areas(level: Node) -> Array[Area2D]:
+	var areas: Array[Area2D] = []
+
+	var direct := level.get_node_or_null("Death") as Area2D
+	if direct:
+		areas.append(direct)
+
+	for child in level.find_children("*", "Area2D", true, false):
+		var area := child as Area2D
+		if area and area.name.to_lower().contains("death") and not areas.has(area):
+			areas.append(area)
+
+	return areas
+
+func _find_death_bodies(level: Node) -> Array[PhysicsBody2D]:
+	var bodies: Array[PhysicsBody2D] = []
+
+	for child in level.find_children("*", "PhysicsBody2D", true, false):
+		var body := child as PhysicsBody2D
+		if body and body.name.to_lower().contains("death"):
+			bodies.append(body)
+
+	return bodies
+
+func _disconnect_death_areas() -> void:
+	for death_area in _death_areas:
+		if death_area and death_area.body_entered.is_connected(_on_player_death):
+			death_area.body_entered.disconnect(_on_player_death)
 
 func _update_camera_bounds(level: Level) -> void:
 	var min_x := INF
@@ -126,18 +164,37 @@ func _arm_death(load_id: int) -> void:
 
 	if load_id != _level_load_id or current_level == null:
 		return
-	if _death_area == null:
+	if _death_areas.is_empty():
 		_death_armed = true
 		return
 
 	var attempts := 0
-	while attempts < 120 and _death_area.get_overlapping_bodies().has(player):
+	while attempts < 120 and _is_player_overlapping_any_death_area():
 		await get_tree().physics_frame
 		if load_id != _level_load_id or current_level == null:
 			return
 		attempts += 1
 
 	_death_armed = true
+
+func _is_player_overlapping_any_death_area() -> bool:
+	for death_area in _death_areas:
+		if death_area and death_area.get_overlapping_bodies().has(player):
+			return true
+	return false
+
+func _is_touching_any_death_body() -> bool:
+	for i in range(player.get_slide_collision_count()):
+		var collision := player.get_slide_collision(i)
+		if collision == null:
+			continue
+		var collider := collision.get_collider() as Node
+		if collider == null:
+			continue
+		if collider is PhysicsBody2D and _death_bodies.has(collider):
+			return true
+
+	return false
 
 func _on_level_complete(body: Node2D) -> void:
 	# Only the player should complete the level.
@@ -154,8 +211,7 @@ func _on_level_complete(body: Node2D) -> void:
 	# Disarm this level's trigger immediately to prevent duplicate enters.
 	if current_level and current_level.level_complete_area.body_entered.is_connected(_on_level_complete):
 		current_level.level_complete_area.body_entered.disconnect(_on_level_complete)
-	if _death_area and _death_area.body_entered.is_connected(_on_player_death):
-		_death_area.body_entered.disconnect(_on_player_death)
+	_disconnect_death_areas()
 
 	# Capture path before awaits/load so we don't rely on mutable state later.
 	var next_path := current_level.next_level_path
@@ -189,8 +245,7 @@ func _on_player_death(body: Node2D) -> void:
 
 	if current_level and current_level.level_complete_area.body_entered.is_connected(_on_level_complete):
 		current_level.level_complete_area.body_entered.disconnect(_on_level_complete)
-	if _death_area and _death_area.body_entered.is_connected(_on_player_death):
-		_death_area.body_entered.disconnect(_on_player_death)
+	_disconnect_death_areas()
 
 	EventBus.playing = false
 

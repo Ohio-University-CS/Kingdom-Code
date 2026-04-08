@@ -1139,12 +1139,6 @@ sources/4 = SubResource("TileSetAtlasSource_q1ycg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3x56"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_286st"]
-size = Vector2(189, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1ycg"]
-size = Vector2(413, 14)
-
 [node name="Level" type="Node2D" unique_id=1968834058]
 script = ExtResource("1_eue43")
 
@@ -1175,17 +1169,3 @@ shape = SubResource("RectangleShape2D_y3x56")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=716162703]
 position = Vector2(11, 190)
-
-[node name="Area2D" type="StaticBody2D" parent="." unique_id=468592262]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1901190336]
-position = Vector2(108.5, 124.5)
-shape = SubResource("RectangleShape2D_286st")
-
-[node name="Death" type="Area2D" parent="." unique_id=765360358]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death" unique_id=1444884008]
-position = Vector2(220.5, 333)
-shape = SubResource("RectangleShape2D_q1ycg")
