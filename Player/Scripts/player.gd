@@ -52,6 +52,8 @@ func _physics_process(delta: float) -> void:
 			EventBus.next_block.emit()
 	
 	if EventBus.playing == false:
+		global_position.x = round((global_position.x - 8)/16)*16 + 8
+		distance_to_move = global_position.x
 		velocity.x = 0
 	move_and_slide()
 	
