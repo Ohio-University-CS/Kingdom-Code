@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cj2jgjub7s7hb" path="res://Kindom Code Art/Background (First Level).png" id="2_wbw1h"]
 [ext_resource type="Texture2D" uid="uid://cl1ji0koimo1q" path="res://Kindom Code Art/Castle (First Level).png" id="3_286st"]
 [ext_resource type="Texture2D" uid="uid://cm0ysu3wat01i" path="res://Kindom Code Art/Grass (First Level).png" id="4_q1ycg"]
-[ext_resource type="Texture2D" uid="uid://dqnnfrw52tdx4" path="res://Kindom Code Art/Level 2 Background.png" id="5_286st"]
+[ext_resource type="Texture2D" uid="uid://bspqiogapfujb" path="res://Kindom Code Art/Level 2 Background.png" id="5_286st"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3x56"]
 texture = ExtResource("3_286st")
@@ -1139,6 +1139,12 @@ sources/4 = SubResource("TileSetAtlasSource_q1ycg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3x56"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_286st"]
+size = Vector2(189, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1ycg"]
+size = Vector2(413, 14)
+
 [node name="Level" type="Node2D" unique_id=1968834058]
 script = ExtResource("1_eue43")
 
@@ -1169,3 +1175,17 @@ shape = SubResource("RectangleShape2D_y3x56")
 
 [node name="PlayerSpawn" type="Marker2D" parent="." unique_id=716162703]
 position = Vector2(11, 190)
+
+[node name="Area2D" type="StaticBody2D" parent="." unique_id=468592262]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1901190336]
+position = Vector2(108.5, 124.5)
+shape = SubResource("RectangleShape2D_286st")
+
+[node name="Death" type="Area2D" parent="." unique_id=765360358]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death" unique_id=1444884008]
+position = Vector2(220.5, 333)
+shape = SubResource("RectangleShape2D_q1ycg")
