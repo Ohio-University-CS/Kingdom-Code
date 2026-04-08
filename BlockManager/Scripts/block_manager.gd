@@ -84,8 +84,8 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
-var cycles = 0
-var checkedForCycles = false
+#var cycles = 0
+#var checkedForCycles = false
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
 		
@@ -96,28 +96,31 @@ func go_next():
 			return
 	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
-	errorTimer.start()
+	
 	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		#print(player.global_position.x - testing)
+		EventBus.multiplier = currentBlock._check_for_multiplier()
 		testing = player.global_position.x
 		print(EventBus.movementDirection)
 		
-		if !checkedForCycles:
-			cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
-			print("counting the amount of cycles, ", cycles)
-			checkedForCycles = true
-		if cycles > 1:
-			print("tell code to run the code again")
-			currentBlock = currentBlock.lastNode
-			cycles -= 1
-		else:
-			print("done running the code")
-			checkedForCycles = false
-			cycles = 0
+		EventBus.next_block_two.emit() ## calls for player to get pos to move to
 		
-		return
+		#if !checkedForCycles:
+			#cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
+			#print("counting the amount of cycles, ", cycles)
+			#checkedForCycles = true
+		#if cycles > 1:
+			#print("tell code to run the code again")
+			#currentBlock = currentBlock.lastNode
+			#cycles -= 1
+		#else:
+			#print("done running the code")
+			#checkedForCycles = false
+			#cycles = 0
+		
+		
 	elif currentBlock.is_in_group("DashBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		var raycast = player.get_child(5) #raycast position leftcast
@@ -128,11 +131,13 @@ func go_next():
 			player.global_position.x += newPos.x
 		else:
 			player.global_position.x += 48 * EventBus.movementDirection.x #size of raycast, change if target position changes
-		player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
+		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
-		return
+		
 	else:
 		print("not detecting a block ", currentBlock.name)
+	errorTimer.wait_time = 1 * EventBus.multiplier
+	errorTimer.start()
 
 
 func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block
