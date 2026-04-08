@@ -64,7 +64,7 @@ script = ExtResource("2_y3crg")
 block_scene = ExtResource("7_xjcaf")
 
 [node name="StartingBlock" type="Sprite2D" parent="CanvasLayer" unique_id=1408567468]
-position = Vector2(25, 87)
+position = Vector2(32, 87)
 texture = ExtResource("4_kvxur")
 
 [node name="ConnectNextBlockDetector" type="Area2D" parent="CanvasLayer/StartingBlock" unique_id=2007063981 groups=["ConnectAbove", "StartingBlock"]]

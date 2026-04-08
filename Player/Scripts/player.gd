@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		#if posChanged:
 		global_position.x = round((global_position.x - 8)/16)*16 + 8
 			#posChanged = false
-		print("updating final position to", global_position.x)
+		#print("updating final position to", global_position.x)
 		
 		if EventBus.playing == true:
 			EventBus.next_block.emit()

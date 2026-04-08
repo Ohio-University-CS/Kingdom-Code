@@ -88,7 +88,8 @@ var testing = 0
 #var checkedForCycles = false
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
-		
+		if currentBlock.has_node("Star"): 
+			currentBlock.get_node("Star").visible = false #removing star when ended
 		_on_play_button_pressed()
 		#print(currentBlock)
 		if currentBlock.nextNode == null:
@@ -96,6 +97,12 @@ func go_next():
 			return
 	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
+	
+	if currentBlock.has_node("Star"): # puts a star next to the running node
+		currentBlock.get_node("Star").visible = true
+	if currentBlock.lastNode:
+		if currentBlock.lastNode.has_node("Star"):
+			currentBlock.lastNode.get_node("Star").visible = false
 	
 	print("running a block ", currentBlock.name)
 	if currentBlock.is_in_group("MoveBlock"):
