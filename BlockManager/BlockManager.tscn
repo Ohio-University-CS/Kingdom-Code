@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://rtgx5fst6ma6" path="res://Sprites/Blocks/StartingBlock.png" id="4_kvxur"]
 [ext_resource type="PackedScene" uid="uid://dy4c3748uwx7h" path="res://BlockManager/Blocks/left_block.tscn" id="5_oa2n6"]
 [ext_resource type="PackedScene" uid="uid://dp54q63hhlpbw" path="res://BlockManager/Blocks/dash_block.tscn" id="6_oa2n6"]
+[ext_resource type="PackedScene" uid="uid://c87qdd58oipb3" path="res://BlockManager/Blocks/multiplier_block.tscn" id="7_xjcaf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvxur"]
 size = Vector2(10, 6)
@@ -57,8 +58,13 @@ position = Vector2(5, 40)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("6_oa2n6")
 
+[node name="MultiplierBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1106722333]
+position = Vector2(64, 64)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("7_xjcaf")
+
 [node name="StartingBlock" type="Sprite2D" parent="CanvasLayer" unique_id=1408567468]
-position = Vector2(18, 87)
+position = Vector2(25, 87)
 texture = ExtResource("4_kvxur")
 
 [node name="ConnectNextBlockDetector" type="Area2D" parent="CanvasLayer/StartingBlock" unique_id=2007063981 groups=["ConnectAbove", "StartingBlock"]]

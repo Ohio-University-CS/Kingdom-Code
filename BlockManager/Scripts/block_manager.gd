@@ -84,6 +84,8 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
+var cycles = 0
+var checkedForCycles = false
 func go_next():
 	if currentBlock.nextNode == null: #loops the code blocks
 		
@@ -101,6 +103,21 @@ func go_next():
 		#print(player.global_position.x - testing)
 		testing = player.global_position.x
 		print(EventBus.movementDirection)
+		
+		if !checkedForCycles:
+			cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
+			print("counting the amount of cycles, ", cycles)
+			checkedForCycles = true
+		if cycles > 1:
+			print("tell code to run the code again")
+			currentBlock = currentBlock.lastNode
+			cycles -= 1
+		else:
+			print("done running the code")
+			checkedForCycles = false
+			cycles = 0
+		
+		return
 	elif currentBlock.is_in_group("DashBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		var raycast = player.get_child(5) #raycast position leftcast

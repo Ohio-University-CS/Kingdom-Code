@@ -69,17 +69,26 @@ func _on_connect_to_next_detector_area_exited(area: Area2D) -> void:
 		pass
 	
 
+var directionNode = null
 func _check_for_direction():
 	if has_node("RightBlock"):
-		#print("Direction is right")
+		directionNode = get_node("RightBlock")
 		return Vector2.RIGHT
 	elif has_node("LeftBlock"):
-		#print("Direction is left")
+		directionNode = get_node("LeftBlock")
 		return Vector2.LEFT
 	elif has_node("UpBlock"):
-		#print("Direction is up")
+		directionNode = get_node("UpBlock")
 		return Vector2.UP
 	return Vector2.ZERO
+
+func _check_for_multiplier():
+	if directionNode.has_node("MultiplierBlock"):
+		print("found it")
+		var cycles = directionNode.get_node("MultiplierBlock").cycles
+		return cycles
+	print("didnt find the multiplier block")
+	return 1;
 
 func _update_position():
 	position = Vector2.ZERO
