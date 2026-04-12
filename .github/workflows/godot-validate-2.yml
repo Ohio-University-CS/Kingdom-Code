@@ -1,0 +1,22 @@
+name: Validate BlockManager Script
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify block_manager.gd exists
+        run: |
+          SCRIPT_PATH="BlockManager/Scripts/block_manager.gd"
+          if [ ! -f "$SCRIPT_PATH" ]; then
+            echo "block_manager.gd is missing at $SCRIPT_PATH"
+            exit 1
+          fi
