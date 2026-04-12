@@ -9,9 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://dy4c3748uwx7h" path="res://BlockManager/Blocks/left_block.tscn" id="5_oa2n6"]
 [ext_resource type="PackedScene" uid="uid://dp54q63hhlpbw" path="res://BlockManager/Blocks/dash_block.tscn" id="6_oa2n6"]
 [ext_resource type="PackedScene" uid="uid://c87qdd58oipb3" path="res://BlockManager/Blocks/multiplier_block.tscn" id="7_xjcaf"]
+[ext_resource type="Texture2D" uid="uid://dbk87qcwyka68" path="res://Sprites/Blocks/TrashCan.png" id="10_4o2ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvxur"]
 size = Vector2(10, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3w4g"]
+size = Vector2(20, 23)
 
 [node name="BlockManager" type="Node2D" unique_id=1008006284]
 script = ExtResource("1_rc834")
@@ -85,6 +89,16 @@ offset_left = -15.0
 offset_top = -15.0
 offset_right = 15.0
 offset_bottom = 15.0
+
+[node name="TrashCan" type="Sprite2D" parent="CanvasLayer" unique_id=1719089423]
+position = Vector2(20, 225)
+texture = ExtResource("10_4o2ck")
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/TrashCan" unique_id=182477782 groups=["TrashCan"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/TrashCan/Area2D" unique_id=1601623212]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_b3w4g")
 
 [node name="ErrorTimer" type="Timer" parent="." unique_id=1398483139]
 process_callback = 0

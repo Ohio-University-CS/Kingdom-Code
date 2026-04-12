@@ -10,7 +10,7 @@ var buttonHeld = false
 var connectToBlock = null
 var blockAttachingTo = null
 
-
+var inTrash = false
 
 func _process(_delta: float = 1) -> void:
 	if buttonHeld:
@@ -23,6 +23,9 @@ func _on_button_button_down() -> void:
 
 func _on_button_button_up() -> void:
 	buttonHeld = false
+	
+	if inTrash:
+		queue_free()
 	
 	var tmpParent = get_parent().get_parent() #this code is to have the last parent stop registering this node as its child
 	if tmpParent.name == "StartingBlock":
@@ -50,10 +53,14 @@ func _on_connect_to_last_detector_area_entered(area: Area2D) -> void:
 		connectToBlock = area.global_position
 		blockAttachingTo = area
 		print("connecting blockattachingto and connecttoblock")
+	elif area.is_in_group("TrashCan"):
+		inTrash = true
 
 func _on_connect_to_last_detector_area_exited(area: Area2D) -> void: 
 	if area.is_in_group("ConnectAbove"):
 		connectToBlock = null
+	elif area.is_in_group("TrashCan"):
+		inTrash = false
 
 
 
