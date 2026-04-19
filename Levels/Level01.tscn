@@ -2,4 +2,27 @@
 
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_dd4jf"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd4jf"]
+size = Vector2(16, 16)
+
 [node name="Level" unique_id=1968834058 instance=ExtResource("1_dd4jf")]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="5" unique_id=1648990278 groups=["Step"]]
+position = Vector2(136, 150)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0" unique_id=617575146]
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_dd4jf")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="6" unique_id=1001020995 groups=["Step"]]
+position = Vector2(136, 166)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1790357936]
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_dd4jf")
+one_way_collision = true
+one_way_collision_margin = 2.0

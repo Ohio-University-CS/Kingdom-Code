@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity
 	else:
-		if EventBus.movementDirection.y != 0:
+		if EventBus.movementDirection.y < 0:
 			velocity.y = EventBus.movementDirection.y * 150 ## jump height
 			EventBus.movementDirection.y = 0
 			#EventBus.next_block.emit() #Goes to next block directly after starting the jump
@@ -48,7 +48,8 @@ func _physics_process(delta: float) -> void:
 			#posChanged = false
 		#print("updating final position to", global_position.x)
 		
-		if EventBus.playing == true:
+		if EventBus.playing == true and EventBus.movementDirection.y != 1:
+			print("pushed to next block by the player, ", EventBus.movementDirection)
 			EventBus.next_block.emit()
 	
 	if EventBus.playing == false:

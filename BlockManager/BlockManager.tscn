@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://7x1l8agtr5jo" path="res://BlockManager/Scripts/block_manager.gd" id="1_rc834"]
 [ext_resource type="Script" uid="uid://b2w7piu1qq0q7" path="res://Utilities/Block/block_spawner.gd" id="2_y3crg"]
 [ext_resource type="PackedScene" uid="uid://dtxobw47qu6bw" path="res://BlockManager/Blocks/right_block.tscn" id="3_1bv57"]
+[ext_resource type="PackedScene" uid="uid://bi1t6yrl7j2r8" path="res://BlockManager/Blocks/down_block.tscn" id="3_b3w4g"]
 [ext_resource type="Texture2D" uid="uid://b5uv1oe33sjib" path="res://Sprites/UI/PausePlay.png" id="4_1bv57"]
 [ext_resource type="PackedScene" uid="uid://bfv6pij14ncxa" path="res://BlockManager/Blocks/up_block.tscn" id="4_2eekb"]
 [ext_resource type="Texture2D" uid="uid://rtgx5fst6ma6" path="res://Sprites/Blocks/StartingBlock.png" id="4_kvxur"]
@@ -38,8 +39,13 @@ color = Color(0, 0, 0, 0.39607844)
 
 [node name="Spawners" type="Node2D" parent="CanvasLayer" unique_id=1068301406]
 
-[node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
+[node name="DownBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=846740424]
 position = Vector2(5, 6)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("3_b3w4g")
+
+[node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
+position = Vector2(45, 39)
 script = ExtResource("2_y3crg")
 
 [node name="RightBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1912441362]
@@ -48,7 +54,7 @@ script = ExtResource("2_y3crg")
 block_scene = ExtResource("3_1bv57")
 
 [node name="UpBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2027981136]
-position = Vector2(5, 22)
+position = Vector2(6, 20)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("4_2eekb")
 
@@ -79,7 +85,7 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_kvxur")
 
 [node name="PausePlay" type="Sprite2D" parent="CanvasLayer" unique_id=1694897149]
-position = Vector2(73, 145)
+position = Vector2(69, 222)
 texture = ExtResource("4_1bv57")
 vframes = 2
 

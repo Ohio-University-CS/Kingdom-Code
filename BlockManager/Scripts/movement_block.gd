@@ -87,6 +87,9 @@ func _check_for_direction():
 	elif has_node("UpBlock"):
 		directionNode = get_node("UpBlock")
 		return Vector2.UP
+	elif has_node("DownBlock"):
+		directionNode = get_node("DownBlock")
+		return Vector2.DOWN
 	return Vector2.ZERO
 
 func _check_for_multiplier():

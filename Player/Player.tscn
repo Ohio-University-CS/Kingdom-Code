@@ -219,3 +219,5 @@ target_position = Vector2(-64, 0)
 [node name="RightCast" type="RayCast2D" parent="." unique_id=1631193963]
 position = Vector2(8, 0)
 target_position = Vector2(64, 0)
+
+[node name="DownCast" type="RayCast2D" parent="." unique_id=797081637]

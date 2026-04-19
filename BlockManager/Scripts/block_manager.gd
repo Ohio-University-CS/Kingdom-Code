@@ -84,9 +84,14 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
+var step = null
 #var cycles = 0
 #var checkedForCycles = false
 func go_next():
+	if step != null:
+		print("(run aftr) step is: ", step)
+		step.get_child(0).disabled = false
+		step = null
 	if currentBlock.nextNode == null: #loops the code blocks
 		if currentBlock.has_node("Star"): 
 			currentBlock.get_node("Star").visible = false #removing star when ended
@@ -110,10 +115,26 @@ func go_next():
 		#print(player.global_position.x - testing)
 		EventBus.multiplier = currentBlock._check_for_multiplier()
 		testing = player.global_position.x
-		print(EventBus.movementDirection)
+		print(EventBus.movementDirection, "this thing - block manager")
 		
-		EventBus.next_block_two.emit() ## calls for player to get pos to move to
 		
+		if player.get_child(7).is_colliding() and EventBus.movementDirection == Vector2.DOWN:
+			step = player.get_child(7).get_collider()
+			print("(run before) step is: ", step, EventBus.movementDirection)
+		
+		if step:
+			print("it should be existing rn")
+			if step.is_in_group("Step"):
+				step.get_child(0).disabled = true
+				print("should be dropping right nowwwwwwwww", EventBus.movementDirection)
+				errorTimer.wait_time = 1 * EventBus.multiplier
+				errorTimer.start()
+			else:
+				EventBus.next_block_two.emit() ## calls for player to get pos to move to
+				print("pushed block, missed the step")
+		else:
+			EventBus.next_block_two.emit() ## calls for player to get pos to move to
+			
 		#if !checkedForCycles:
 			#cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
 			#print("counting the amount of cycles, ", cycles)
