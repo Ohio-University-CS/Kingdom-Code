@@ -84,9 +84,15 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 
 var testing = 0
+var step = null
 #var cycles = 0
 #var checkedForCycles = false
 func go_next():
+	if step != null:
+		print("(run aftr) step is: ", step)
+		step = null
+		if step.has_children():
+			step.get_child(0).disabled = false
 	if currentBlock.nextNode == null: #loops the code blocks
 		if currentBlock.has_node("Star"): 
 			currentBlock.get_node("Star").visible = false #removing star when ended
@@ -110,10 +116,26 @@ func go_next():
 		#print(player.global_position.x - testing)
 		EventBus.multiplier = currentBlock._check_for_multiplier()
 		testing = player.global_position.x
-		print(EventBus.movementDirection)
+		print(EventBus.movementDirection, "this thing - block manager")
 		
-		EventBus.next_block_two.emit() ## calls for player to get pos to move to
 		
+		if player.get_child(7).is_colliding() and EventBus.movementDirection == Vector2.DOWN:
+			step = player.get_child(7).get_collider()
+			print("(run before) step is: ", step, EventBus.movementDirection)
+		
+		if step:
+			print("it should be existing rn")
+			if step.is_in_group("Step"):
+				step.get_child(0).disabled = true
+				print("should be dropping right nowwwwwwwww", EventBus.movementDirection)
+				errorTimer.wait_time = 1
+				errorTimer.start()
+			else:
+				EventBus.next_block_two.emit() ## calls for player to get pos to move to
+				print("pushed block, missed the step")
+		else:
+			EventBus.next_block_two.emit() ## calls for player to get pos to move to
+			
 		#if !checkedForCycles:
 			#cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
 			#print("counting the amount of cycles, ", cycles)
@@ -141,10 +163,21 @@ func go_next():
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		
+	elif currentBlock.is_in_group("WaitBlock"): #Waits for 1 second
+		errorTimer.wait_time = 1
+		errorTimer.start()
+	elif currentBlock.is_in_group("SwitchBlock"): # pulls levers
+		if player.currentSwitch != null:
+			print("pulling switch")
+			player.currentSwitch._pull_switch()
+			errorTimer.wait_time = 1
+			errorTimer.start()
+		else:
+			print("switch not found")
 	else:
 		print("not detecting a block ", currentBlock.name)
-	errorTimer.wait_time = 1 * EventBus.multiplier
-	errorTimer.start()
+		errorTimer.wait_time = 1 * EventBus.multiplier
+		errorTimer.start()
 
 
 func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block

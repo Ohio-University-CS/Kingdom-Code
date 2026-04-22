@@ -57,6 +57,7 @@ func _on_connect_to_last_detector_area_entered(area: Area2D) -> void:
 		inTrash = true
 
 func _on_connect_to_last_detector_area_exited(area: Area2D) -> void: 
+	
 	if area.is_in_group("ConnectAbove"):
 		connectToBlock = null
 	elif area.is_in_group("TrashCan"):
@@ -87,6 +88,9 @@ func _check_for_direction():
 	elif has_node("UpBlock"):
 		directionNode = get_node("UpBlock")
 		return Vector2.UP
+	elif has_node("DownBlock"):
+		directionNode = get_node("DownBlock")
+		return Vector2.DOWN
 	return Vector2.ZERO
 
 func _check_for_multiplier():

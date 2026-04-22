@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bi1t6yrl7j2r8"]
+
+[ext_resource type="Script" uid="uid://dtigxjrvcoxte" path="res://BlockManager/Scripts/right_block.gd" id="1_a2g5e"]
+[ext_resource type="Texture2D" uid="uid://8wf4psktrk4h" path="res://Sprites/Blocks/DownBlock.png" id="1_tflgg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2g5e"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ub0"]
+size = Vector2(10, 10)
+
+[node name="DownBlock" type="Node2D" unique_id=1234701787 groups=["DownBlock"]]
+script = ExtResource("1_a2g5e")
+
+[node name="DirectionBlocks" type="Sprite2D" parent="." unique_id=1003989086 groups=["DownBlock"]]
+position = Vector2(15, 5)
+texture = ExtResource("1_tflgg")
+
+[node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=1411757350 groups=["ConnectFrom", "RightBlock"]]
+position = Vector2(-2, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToLastDetector" unique_id=81602672]
+shape = SubResource("RectangleShape2D_a2g5e")
+
+[node name="Button" type="Button" parent="." unique_id=818213491]
+modulate = Color(1, 1, 1, 0)
+offset_left = -2.0
+offset_right = 13.0
+offset_bottom = 10.0
+action_mode = 0
+
+[node name="Center" type="Node2D" parent="." unique_id=2070274222]
+position = Vector2(11, 5)
+
+[node name="ConnectToNextDetector" type="Area2D" parent="." unique_id=1604227752 groups=["ConnectTo"]]
+position = Vector2(23, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToNextDetector" unique_id=810508763]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_o5ub0")
+
+[connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]
+[connection signal="area_exited" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
