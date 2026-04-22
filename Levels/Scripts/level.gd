@@ -15,6 +15,6 @@ func _ready() -> void:
 func get_next_level_path() -> String:
 	# Simple progression logic
 	var next_level_number := level_number + 1
-	return "res://levels/Level%02d.tscn" % next_level_number
+	return "res://Levels/Level%02d.tscn" % next_level_number
 
 	

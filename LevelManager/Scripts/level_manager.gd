@@ -133,6 +133,21 @@ func _update_camera_bounds(level: Level) -> void:
 		max_x = max(max_x, bottom_right_global.x)
 		max_y = max(max_y, bottom_right_global.y)
 
+	# Fallback for non-tilemap levels: derive bounds from background art.
+	if min_x == INF:
+		var background_sprite := level.get_node_or_null("Background/ParallaxLayer/Sprite2D") as Sprite2D
+		if background_sprite and background_sprite.texture:
+			var size := background_sprite.texture.get_size() * background_sprite.scale.abs()
+			var top_left_global := background_sprite.global_position
+			if background_sprite.centered:
+				top_left_global -= size * 0.5
+			var bottom_right_global := top_left_global + size
+
+			min_x = top_left_global.x
+			min_y = top_left_global.y
+			max_x = bottom_right_global.x
+			max_y = bottom_right_global.y
+
 	if min_x == INF:
 		return
 
