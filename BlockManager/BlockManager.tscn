@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dy4c3748uwx7h" path="res://BlockManager/Blocks/left_block.tscn" id="5_oa2n6"]
 [ext_resource type="PackedScene" uid="uid://dp54q63hhlpbw" path="res://BlockManager/Blocks/dash_block.tscn" id="6_oa2n6"]
 [ext_resource type="PackedScene" uid="uid://c87qdd58oipb3" path="res://BlockManager/Blocks/multiplier_block.tscn" id="7_xjcaf"]
+[ext_resource type="PackedScene" uid="uid://2l5dppb4ksxa" path="res://BlockManager/Blocks/switch_block.tscn" id="8_q8e0p"]
+[ext_resource type="PackedScene" uid="uid://cgdfohc4rv06h" path="res://BlockManager/Blocks/wait_block.tscn" id="9_16npy"]
 [ext_resource type="Texture2D" uid="uid://dbk87qcwyka68" path="res://Sprites/Blocks/TrashCan.png" id="10_4o2ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvxur"]
@@ -44,10 +46,6 @@ position = Vector2(5, 6)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("3_b3w4g")
 
-[node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
-position = Vector2(45, 39)
-script = ExtResource("2_y3crg")
-
 [node name="RightBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1912441362]
 position = Vector2(46, 6)
 script = ExtResource("2_y3crg")
@@ -68,8 +66,22 @@ position = Vector2(5, 40)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("6_oa2n6")
 
+[node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
+position = Vector2(45, 39)
+script = ExtResource("2_y3crg")
+
+[node name="SwitchBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2102817754]
+position = Vector2(5, 55)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("8_q8e0p")
+
+[node name="WaitBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=613958365]
+position = Vector2(7, 67)
+script = ExtResource("2_y3crg")
+block_scene = ExtResource("9_16npy")
+
 [node name="MultiplierBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1106722333]
-position = Vector2(64, 64)
+position = Vector2(65, 69)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("7_xjcaf")
 

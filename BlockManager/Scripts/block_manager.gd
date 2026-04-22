@@ -90,8 +90,9 @@ var step = null
 func go_next():
 	if step != null:
 		print("(run aftr) step is: ", step)
-		step.get_child(0).disabled = false
 		step = null
+		if step.has_children():
+			step.get_child(0).disabled = false
 	if currentBlock.nextNode == null: #loops the code blocks
 		if currentBlock.has_node("Star"): 
 			currentBlock.get_node("Star").visible = false #removing star when ended
@@ -127,7 +128,7 @@ func go_next():
 			if step.is_in_group("Step"):
 				step.get_child(0).disabled = true
 				print("should be dropping right nowwwwwwwww", EventBus.movementDirection)
-				errorTimer.wait_time = 1 * EventBus.multiplier
+				errorTimer.wait_time = 1
 				errorTimer.start()
 			else:
 				EventBus.next_block_two.emit() ## calls for player to get pos to move to
@@ -162,10 +163,21 @@ func go_next():
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		
+	elif currentBlock.is_in_group("WaitBlock"): #Waits for 1 second
+		errorTimer.wait_time = 1
+		errorTimer.start()
+	elif currentBlock.is_in_group("SwitchBlock"): # pulls levers
+		if player.currentSwitch != null:
+			print("pulling switch")
+			player.currentSwitch._pull_switch()
+			errorTimer.wait_time = 1
+			errorTimer.start()
+		else:
+			print("switch not found")
 	else:
 		print("not detecting a block ", currentBlock.name)
-	errorTimer.wait_time = 1 * EventBus.multiplier
-	errorTimer.start()
+		errorTimer.wait_time = 1 * EventBus.multiplier
+		errorTimer.start()
 
 
 func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block

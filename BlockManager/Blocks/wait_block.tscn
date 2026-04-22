@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cgdfohc4rv06h"]
+
+[ext_resource type="Script" uid="uid://2lbdeh7cvg23" path="res://BlockManager/Scripts/movement_block.gd" id="1_w78kp"]
+[ext_resource type="Texture2D" uid="uid://ccfux3ytax2q8" path="res://Sprites/Blocks/WaitBlock.png" id="2_w78kp"]
+[ext_resource type="Texture2D" uid="uid://bvq1bsji1phlh" path="res://Sprites/Blocks/Star.png" id="3_w78kp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w78kp"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6o8x"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqwkf"]
+size = Vector2(10, 7)
+
+[node name="WaitBlock" type="Node2D" unique_id=2094406473]
+script = ExtResource("1_w78kp")
+
+[node name="WaitBlock" type="Sprite2D" parent="." unique_id=740215813 groups=["WaitBlock"]]
+position = Vector2(15, 5)
+texture = ExtResource("2_w78kp")
+
+[node name="Button" type="Button" parent="." unique_id=1863431242]
+modulate = Color(1, 1, 1, 0)
+offset_left = -2.0
+offset_right = 31.0
+offset_bottom = 10.0
+action_mode = 0
+
+[node name="Center" type="Node2D" parent="." unique_id=1600238026]
+position = Vector2(14, 5)
+
+[node name="ConnectToLastDetector" type="Area2D" parent="." unique_id=321408516 groups=["ConnectFrom"]]
+position = Vector2(-2, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToLastDetector" unique_id=917682651]
+z_index = 2
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_w78kp")
+
+[node name="ConnectToNextDetector" type="Area2D" parent="." unique_id=1939120473 groups=["ConnectTo", "MoveBlock"]]
+position = Vector2(29, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToNextDetector" unique_id=251962934]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_y6o8x")
+
+[node name="ConnectNextBlockDetector" type="Area2D" parent="." unique_id=233683630 groups=["ConnectAbove"]]
+position = Vector2(0, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectNextBlockDetector" unique_id=1827096254]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_fqwkf")
+
+[node name="Star" type="Sprite2D" parent="." unique_id=1719963733]
+visible = false
+position = Vector2(-10, 5)
+texture = ExtResource("3_w78kp")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]
+[connection signal="area_exited" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_exited"]

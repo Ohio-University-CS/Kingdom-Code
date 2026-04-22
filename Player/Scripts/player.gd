@@ -58,3 +58,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 	move_and_slide()
 	
+
+var currentSwitch = null
+
+func _on_switch_check_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Switch"):
+		currentSwitch = area
+
+
+func _on_switch_check_area_area_exited(area: Area2D) -> void:
+	if area == currentSwitch:
+		currentSwitch = null

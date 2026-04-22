@@ -57,6 +57,7 @@ func _on_connect_to_last_detector_area_entered(area: Area2D) -> void:
 		inTrash = true
 
 func _on_connect_to_last_detector_area_exited(area: Area2D) -> void: 
+	
 	if area.is_in_group("ConnectAbove"):
 		connectToBlock = null
 	elif area.is_in_group("TrashCan"):
