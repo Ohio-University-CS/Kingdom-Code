@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_8o1xt"]
 [ext_resource type="Texture2D" uid="uid://bh1erxidwglfs" path="res://Kindom Code Art/Level 3 Background (Finished).png" id="2_8o1xt"]
+[ext_resource type="Script" uid="uid://suw0har6u3ch" path="res://Levels/Scripts/switch.gd" id="3_d5gt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o1xt"]
 size = Vector2(174, 15)
@@ -56,6 +57,15 @@ size = Vector2(8, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eiq6"]
 size = Vector2(9.5, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggbv1"]
+size = Vector2(12.0000305, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wscf3"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pvhg"]
+size = Vector2(16, 49)
+
 [node name="Level2" unique_id=1968834058 instance=ExtResource("1_8o1xt")]
 level_name = "Level 03"
 level_number = 3
@@ -69,7 +79,10 @@ position = Vector2(117, 116)
 [node name="PlayerSpawn" parent="." index="2" unique_id=716162703]
 position = Vector2(68, 94)
 
-[node name="CollisionShape2D" parent="StaticBody2D" parent_id_path=PackedInt32Array(185515733) index="0" unique_id=1860594728]
+[node name="StaticBody2D" parent="." index="3" unique_id=185515733]
+position = Vector2(3, 0)
+
+[node name="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1860594728]
 position = Vector2(2, 181)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." index="4" unique_id=582984102]
@@ -207,3 +220,123 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Death5" index="0" unique_id=1006384365]
 position = Vector2(445.25, 244)
 shape = SubResource("RectangleShape2D_0eiq6")
+
+[node name="StepCollision2" type="StaticBody2D" parent="." index="21" unique_id=964585603 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision2" index="0" unique_id=1271208907]
+position = Vector2(-44.999996, 28.000008)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision" type="StaticBody2D" parent="." index="22" unique_id=782833025 groups=["Step"]]
+position = Vector2(152, 167)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision" index="0" unique_id=85948638]
+position = Vector2(-45, 28)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision3" type="StaticBody2D" parent="." index="23" unique_id=542532342 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision3" index="0" unique_id=1991982017]
+position = Vector2(-45, -5)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision4" type="StaticBody2D" parent="." index="24" unique_id=1721738261 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision4" index="0" unique_id=404523282]
+position = Vector2(-45.000004, -20.999992)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision5" type="StaticBody2D" parent="." index="25" unique_id=990567712 groups=["Step"]]
+position = Vector2(152, 167)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision5" index="0" unique_id=656480637]
+position = Vector2(-45.000004, -21.999992)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision6" type="StaticBody2D" parent="." index="26" unique_id=1652025909 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision6" index="0" unique_id=799052698]
+position = Vector2(-45.000008, -54)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision7" type="StaticBody2D" parent="." index="27" unique_id=1405989205 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision7" index="0" unique_id=2096937040]
+position = Vector2(-45.00001, -69.99999)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision8" type="StaticBody2D" parent="." index="28" unique_id=10832496 groups=["Step"]]
+position = Vector2(152, 167)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision8" index="0" unique_id=1228392341]
+position = Vector2(-45.00001, -69.99999)
+rotation = 3.1415927
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="StepCollision9" type="StaticBody2D" parent="." index="29" unique_id=358462252 groups=["Step"]]
+position = Vector2(152, 151)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision9" index="0" unique_id=995364133]
+position = Vector2(-45.000015, -102)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_ggbv1")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="SwitchArea" type="Area2D" parent="." index="30" unique_id=1748562927 groups=["Switch"]]
+position = Vector2(581, 188)
+script = ExtResource("3_d5gt1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea" index="0" unique_id=354456078]
+shape = SubResource("RectangleShape2D_wscf3")
+
+[node name="ColorRect2" type="ColorRect" parent="SwitchArea" index="1" unique_id=754873078]
+offset_left = -101.0
+offset_top = 87.0
+offset_right = -92.0
+offset_bottom = 135.0
+color = Color(0, 0.6440497, 0.27012026, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SwitchArea/ColorRect2" index="0" unique_id=1656671253]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea/ColorRect2/StaticBody2D" index="0" unique_id=1479979931]
+position = Vector2(5, 24.5)
+shape = SubResource("RectangleShape2D_2pvhg")

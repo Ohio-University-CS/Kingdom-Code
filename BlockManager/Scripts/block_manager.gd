@@ -90,9 +90,9 @@ var step = null
 func go_next():
 	if step != null:
 		print("(run aftr) step is: ", step)
-		step = null
-		if step.has_children():
+		if step.get_child_count() > 0:
 			step.get_child(0).disabled = false
+		step = null
 	if currentBlock.nextNode == null: #loops the code blocks
 		if currentBlock.has_node("Star"): 
 			currentBlock.get_node("Star").visible = false #removing star when ended
@@ -149,7 +149,8 @@ func go_next():
 			#checkedForCycles = false
 			#cycles = 0
 		
-		
+		errorTimer.wait_time = 1 * EventBus.multiplier
+		errorTimer.start()
 	elif currentBlock.is_in_group("DashBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		var raycast = player.get_child(5) #raycast position leftcast
@@ -158,8 +159,10 @@ func go_next():
 		if raycast.is_colliding():
 			var newPos = abs(raycast.global_position - raycast.get_collision_point()) * EventBus.movementDirection.x #dist to move
 			player.global_position.x += newPos.x
+			print("running into something, moving only ", newPos)
 		else:
 			player.global_position.x += 64 * EventBus.movementDirection.x #size of raycast, change if target position changes
+			print("running full length")
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		

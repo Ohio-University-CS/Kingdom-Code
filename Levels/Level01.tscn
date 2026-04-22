@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://sm483fpkrm2y"]
 
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_dd4jf"]
-[ext_resource type="Script" uid="uid://bl876usjdku63" path="res://Levels/Scripts/switch.gd" id="2_4xj4b"]
+[ext_resource type="Script" uid="uid://suw0har6u3ch" path="res://Levels/Scripts/switch.gd" id="2_4xj4b"]
 [ext_resource type="Texture2D" uid="uid://cl1ji0koimo1q" path="res://Kindom Code Art/Castle (First Level).png" id="2_mk8wa"]
 [ext_resource type="Texture2D" uid="uid://cm0ysu3wat01i" path="res://Kindom Code Art/Grass (First Level).png" id="3_12jfb"]
-[ext_resource type="Texture2D" uid="uid://dqnnfrw52tdx4" path="res://Kindom Code Art/Level 2 Background.png" id="4_bv1p4"]
+[ext_resource type="Texture2D" uid="uid://bspqiogapfujb" path="res://Kindom Code Art/Level 2 Background.png" id="4_bv1p4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3x56"]
 texture = ExtResource("2_mk8wa")

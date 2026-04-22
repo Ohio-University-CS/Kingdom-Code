@@ -177,7 +177,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ysni"]
-radius = 8.0
+radius = 5.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ysni"]
@@ -224,6 +224,7 @@ position = Vector2(8, 0)
 target_position = Vector2(64, 0)
 
 [node name="DownCast" type="RayCast2D" parent="." unique_id=797081637]
+position = Vector2(0, 15)
 
 [node name="SwitchCheckArea" type="Area2D" parent="." unique_id=1864137144]
 
