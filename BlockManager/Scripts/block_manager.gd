@@ -103,6 +103,7 @@ func go_next():
 			return
 	currentBlock = currentBlock.nextNode
 	var player = get_parent().get_child(1).get_child(1)
+	EventBus.currentBlock = currentBlock
 	
 	if currentBlock.has_node("Star"): # puts a star next to the running node
 		currentBlock.get_node("Star").visible = true
