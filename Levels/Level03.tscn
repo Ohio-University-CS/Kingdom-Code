@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_8o1xt"]
 [ext_resource type="Texture2D" uid="uid://bh1erxidwglfs" path="res://Kindom Code Art/Level 3 Background (Finished).png" id="2_8o1xt"]
 [ext_resource type="Script" uid="uid://suw0har6u3ch" path="res://Levels/Scripts/switch.gd" id="3_d5gt1"]
+[ext_resource type="Texture2D" uid="uid://2bbuopkc34ox" path="res://Kindom Code Art/Level 4 (Doors and Levers)/Green Lever - 1.png" id="4_x7q1b"]
+[ext_resource type="Texture2D" uid="uid://bel84aex7lwgq" path="res://Kindom Code Art/Level 3 (Doors and Levers)/Green Door Open (3 tiles).png" id="5_mei6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o1xt"]
 size = Vector2(174, 15)
@@ -324,10 +326,17 @@ one_way_collision_margin = 2.0
 position = Vector2(581, 188)
 script = ExtResource("3_d5gt1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea" index="0" unique_id=354456078]
+[node name="Sprite2D" type="Sprite2D" parent="SwitchArea" index="0" unique_id=1172406817]
+position = Vector2(-1, -2)
+texture = ExtResource("4_x7q1b")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea" index="1" unique_id=354456078]
 shape = SubResource("RectangleShape2D_wscf3")
 
-[node name="ColorRect2" type="ColorRect" parent="SwitchArea" index="1" unique_id=754873078]
+[node name="Node2D" type="Node2D" parent="SwitchArea" index="2" unique_id=439283573]
+
+[node name="ColorRect2" type="ColorRect" parent="SwitchArea/Node2D" index="0" unique_id=754873078]
 offset_left = -101.0
 offset_top = 87.0
 offset_right = -92.0
@@ -335,8 +344,12 @@ offset_bottom = 135.0
 color = Color(0, 0.6440497, 0.27012026, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="SwitchArea/ColorRect2" index="0" unique_id=1656671253]
+[node name="StaticBody2D" type="StaticBody2D" parent="SwitchArea/Node2D/ColorRect2" index="0" unique_id=1656671253]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea/ColorRect2/StaticBody2D" index="0" unique_id=1479979931]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea/Node2D/ColorRect2/StaticBody2D" index="0" unique_id=1479979931]
 position = Vector2(5, 24.5)
 shape = SubResource("RectangleShape2D_2pvhg")
+
+[node name="Sprite2D" type="Sprite2D" parent="SwitchArea/Node2D" index="1" unique_id=571635592]
+position = Vector2(-97, 111)
+texture = ExtResource("5_mei6w")
