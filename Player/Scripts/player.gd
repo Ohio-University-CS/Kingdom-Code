@@ -49,8 +49,10 @@ func _physics_process(delta: float) -> void:
 		#print("updating final position to", global_position.x)
 		
 		if EventBus.playing == true and EventBus.movementDirection.y != 1:
-			print("pushed to next block by the player, ", EventBus.movementDirection)
-			EventBus.next_block.emit()
+			if EventBus.currentBlock != null:
+				if EventBus.currentBlock.is_in_group("MoveBlock"):
+					print("pushed to next block by the player, ", EventBus.movementDirection)
+					EventBus.next_block.emit()
 	
 	if EventBus.playing == false:
 		global_position.x = round((global_position.x - 8)/16)*16 + 8
