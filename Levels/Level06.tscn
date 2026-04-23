@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dq6jstopr1dli"]
+
+[ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_vdk1n"]
+[ext_resource type="Texture2D" uid="uid://brokrmpusbk7h" path="res://Kindom Code Art/Level 6 Background (Finished).png" id="2_brusf"]
+
+[node name="Level" unique_id=1968834058 instance=ExtResource("1_vdk1n")]
+
+[node name="Sprite2D" parent="Background/ParallaxLayer" parent_id_path=PackedInt32Array(2014595103) index="0" unique_id=2009653652]
+texture = ExtResource("2_brusf")
+
+[node name="CollisionShape2D" parent="LevelComplete" parent_id_path=PackedInt32Array(730946603) index="0" unique_id=647045145]
+position = Vector2(118, 116)
+
+[node name="PlayerSpawn" parent="." index="2" unique_id=716162703]
+position = Vector2(69, 99)
+
+[node name="CollisionShape2D" parent="StaticBody2D" parent_id_path=PackedInt32Array(185515733) index="0" unique_id=1860594728]
+position = Vector2(3, 172)
