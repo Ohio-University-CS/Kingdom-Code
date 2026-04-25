@@ -26,14 +26,15 @@ func _ready() -> void:
 	load_level(current_level_path)
 
 func _process(_delta: float) -> void:
-	if EventBus.playing == false:
-		#player.set_process(false)
-		#player.set_physics_process(false)
-		player.animation_player.pause()
-	else:
-		#player.set_process(true)
-		#player.set_physics_process(true)
-		player.animation_player.play()
+	pass
+	#if EventBus.playing == false:
+		##player.set_process(false)
+		##player.set_physics_process(false)
+		#player.animation_player.pause()
+	#else:
+		##player.set_process(true)
+		##player.set_physics_process(true)
+		#player.animation_player.play()
 
 func _physics_process(_delta: float) -> void:
 	if _transitioning or not _death_armed:

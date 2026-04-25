@@ -9,7 +9,7 @@ size = Vector2(2, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b124p"]
 size = Vector2(10, 10)
 
-[node name="UpBlock" type="Node2D" unique_id=1483720473]
+[node name="UpBlock" type="Node2D" unique_id=1483720473 groups=["UpBlock"]]
 script = ExtResource("1_l4sj2")
 
 [node name="DirectionBlocks" type="Sprite2D" parent="." unique_id=716417077]

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://vmigsjoxssh8"]
+[gd_scene format=3 uid="uid://dmlqf5johd2n5"]
 
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_3phfy"]
 [ext_resource type="Texture2D" uid="uid://b2lwxh3uplk22" path="res://Kindom Code Art/Level 5 Background (Finished).png" id="2_mk2g0"]
-[ext_resource type="Script" uid="uid://suw0har6u3ch" path="res://Levels/Scripts/switch.gd" id="3_ct03n"]
+[ext_resource type="Script" uid="uid://bl876usjdku63" path="res://Levels/Scripts/switch.gd" id="3_ct03n"]
 [ext_resource type="Texture2D" uid="uid://b0pvrs25n2g27" path="res://Kindom Code Art/Level 4 (Doors and Levers)/Blue Lever - 1.png" id="4_7naiv"]
 [ext_resource type="Texture2D" uid="uid://dsx3bf3ar6wmg" path="res://Kindom Code Art/Level 4 (Doors and Levers)/Blue Door Open (3 tiles).png" id="5_4jj2f"]
 [ext_resource type="Texture2D" uid="uid://2bbuopkc34ox" path="res://Kindom Code Art/Level 4 (Doors and Levers)/Green Lever - 1.png" id="6_gb5fl"]

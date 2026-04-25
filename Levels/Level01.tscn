@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://sm483fpkrm2y"]
 
 [ext_resource type="PackedScene" uid="uid://bt228qgvt47it" path="res://Levels/Level.tscn" id="1_dd4jf"]
-[ext_resource type="Script" uid="uid://bl876usjdku63" path="res://Levels/Scripts/switch.gd" id="2_4xj4b"]
 [ext_resource type="Texture2D" uid="uid://cl1ji0koimo1q" path="res://Kindom Code Art/Castle (First Level).png" id="2_mk8wa"]
 [ext_resource type="Texture2D" uid="uid://cm0ysu3wat01i" path="res://Kindom Code Art/Grass (First Level).png" id="3_12jfb"]
 [ext_resource type="Texture2D" uid="uid://dqnnfrw52tdx4" path="res://Kindom Code Art/Level 2 Background.png" id="4_bv1p4"]
@@ -83,9 +82,8 @@ texture = ExtResource("3_12jfb")
 14:10/0 = 0
 4:11/0 = 0
 5:11/0 = 0
-5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -1.3057747, -8, 8, 8, 8)
 6:11/0 = 0
-6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -0.43525696, -8, -0.43525696, 8, -8, 8, 8, -8, 8)
+6:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.5, 8, -1.5, 8, 8, -8, 8)
 7:11/0 = 0
 7:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:11/0 = 0
@@ -108,9 +106,8 @@ texture = ExtResource("3_12jfb")
 0:12/0 = 0
 1:12/0 = 0
 2:12/0 = 0
-2:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -2.1762905, -8, 8, 8, 8)
 3:12/0 = 0
-3:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -1.3057747, -8, -1.4798775, -8, 8, 8, 8)
+3:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -1.5, -8, -1.3057747, -8, -1.4798775, -8, 8, 8, 8)
 4:12/0 = 0
 4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:12/0 = 0
@@ -1137,15 +1134,6 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_qc8g6")
 sources/4 = SubResource("TileSetAtlasSource_q1ycg")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd4jf"]
-size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xj4b"]
-size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0mw7"]
-size = Vector2(5, 99)
-
 [node name="Level" unique_id=1968834058 instance=ExtResource("1_dd4jf")]
 
 [node name="CollisionShape2D" parent="StaticBody2D" parent_id_path=PackedInt32Array(185515733) index="0" unique_id=1860594728]
@@ -1158,59 +1146,3 @@ tile_set = SubResource("TileSet_cf1t6")
 [node name="Ground2" type="TileMapLayer" parent="." index="5" unique_id=1637354989]
 tile_map_data = PackedByteArray("AAAAAAwAAQAAAAwAAAAAAA0AAQAAAA0AAAAAAA4AAQAAAA4AAAAAAA8AAQAAAA8AAAAAABAAAQAAABAAAAABAAwAAQABAAwAAAABAA0AAQABAA0AAAABAA4AAQABAA4AAAABAA8AAQABAA8AAAABABAAAQABABAAAAACAAwAAQACAAwAAAACAA0AAQACAA0AAAACAA4AAQACAA4AAAACAA8AAQACAA8AAAACABAAAQACABAAAAADAAwAAQADAAwAAAADAA0AAQADAA0AAAADAA4AAQADAA4AAAADAA8AAQADAA8AAAADABAAAQADABAAAAAEAAsAAQAEAAsAAAAEAAwAAQAEAAwAAAAEAA0AAQAEAA0AAAAEAA4AAQAEAA4AAAAEAA8AAQAEAA8AAAAEABAAAQAEABAAAAAFAAsAAQAFAAsAAAAFAAwAAQAFAAwAAAAFAA0AAQAFAA0AAAAFAA4AAQAFAA4AAAAFAA8AAQAFAA8AAAAFABAAAQAFABAAAAAGAAsAAQAGAAsAAAAGAAwAAQAGAAwAAAAGAA0AAQAGAA0AAAAGAA4AAQAGAA4AAAAGAA8AAQAGAA8AAAAGABAAAQAGABAAAAAHAAoAAQAHAAoAAAAHAAsAAQAHAAsAAAAHAAwAAQAHAAwAAAAHAA0AAQAHAA0AAAAHAA4AAQAHAA4AAAAHAA8AAQAHAA8AAAAHABAAAQAHABAAAAAIAAkAAQAIAAkAAAAIAAoAAQAIAAoAAAAIAAsAAQAIAAsAAAAIAAwAAQAIAAwAAAAIAA0AAQAIAA0AAAAIAA4AAQAIAA4AAAAIAA8AAQAIAA8AAAAIABAAAQAIABAAAAAJAAkAAQAJAAkAAAAJAAoAAQAJAAoAAAAJAAsAAQAJAAsAAAAJAAwAAQAJAAwAAAAJAA0AAQAJAA0AAAAJAA4AAQAJAA4AAAAJAA8AAQAJAA8AAAAJABAAAQAJABAAAAAKAAoAAQAKAAoAAAAKAAsAAQAKAAsAAAAKAAwAAQAKAAwAAAAKAA0AAQAKAA0AAAAKAA4AAQAKAA4AAAAKAA8AAQAKAA8AAAAKABAAAQAKABAAAAALAAsAAQALAAsAAAALAAwAAQALAAwAAAALAA0AAQALAA0AAAALAA4AAQALAA4AAAALAA8AAQALAA8AAAALABAAAQALABAAAAAMAAoAAQAMAAoAAAAMAAsAAQAMAAsAAAAMAAwAAQAMAAwAAAAMAA0AAQAMAA0AAAAMAA4AAQAMAA4AAAAMAA8AAQAMAA8AAAAMABAAAQAMABAAAAANAAoAAQANAAoAAAANAAsAAQANAAsAAAANAAwAAQANAAwAAAANAA0AAQANAA0AAAANAA4AAQANAA4AAAANAA8AAQANAA8AAAANABAAAQANABAAAAAOAAoAAQAOAAoAAAAOAAsAAQAOAAsAAAAOAAwAAQAOAAwAAAAOAA0AAQAOAA0AAAAOAA4AAQAOAA4AAAAOAA8AAQAOAA8AAAAOABAAAQAOABAAAAAPAAsAAQAPAAsAAAAPAAwAAQAPAAwAAAAPAA0AAQAPAA0AAAAPAA4AAQAPAA4AAAAPAA8AAQAPAA8AAAAPABAAAQAPABAAAAAQAAsAAQAQAAsAAAAQAAwAAQAQAAwAAAAQAA0AAQAQAA0AAAAQAA4AAQAQAA4AAAAQAA8AAQAQAA8AAAAQABAAAQAQABAAAAARAAsAAQARAAsAAAARAAwAAQARAAwAAAARAA0AAQARAA0AAAARAA4AAQARAA4AAAARAA8AAQARAA8AAAARABAAAQARABAAAAASAAsAAQASAAsAAAASAAwAAQASAAwAAAASAA0AAQASAA0AAAASAA4AAQASAA4AAAASAA8AAQASAA8AAAASABAAAQASABAAAAATAAwAAQATAAwAAAATAA0AAQATAA0AAAATAA4AAQATAA4AAAATAA8AAQATAA8AAAATABAAAQATABAAAAAUAAwAAQAUAAwAAAAUAA0AAQAUAA0AAAAUAA4AAQAUAA4AAAAUAA8AAQAUAA8AAAAUABAAAQAUABAAAAAVAAwAAQAVAAwAAAAVAA0AAQAVAA0AAAAVAA4AAQAVAA4AAAAVAA8AAQAVAA8AAAAVABAAAQAVABAAAAAWAAwAAQAWAAwAAAAWAA0AAQAWAA0AAAAWAA4AAQAWAA4AAAAWAA8AAQAWAA8AAAAWABAAAQAWABAAAAAXAAwAAQAXAAwAAAAXAA0AAQAXAA0AAAAXAA4AAQAXAA4AAAAXAA8AAQAXAA8AAAAXABAAAQAXABAAAAAYAAwAAQAYAAwAAAAYAA0AAQAYAA0AAAAYAA4AAQAYAA4AAAAYAA8AAQAYAA8AAAAYABAAAQAYABAAAAA=")
 tile_set = SubResource("TileSet_eue43")
-
-[node name="StepCollision2" type="StaticBody2D" parent="." index="6" unique_id=1127118223 groups=["Step"]]
-position = Vector2(152, 151)
-rotation = -3.1415925
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision2" index="0" unique_id=1769298308]
-rotation = 3.1415927
-shape = SubResource("RectangleShape2D_dd4jf")
-one_way_collision = true
-one_way_collision_margin = 2.0
-
-[node name="StepCollision" type="StaticBody2D" parent="." index="7" unique_id=2097961342 groups=["Step"]]
-position = Vector2(152, 167)
-rotation = -3.1415925
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StepCollision" index="0" unique_id=226458846]
-rotation = 3.1415927
-shape = SubResource("RectangleShape2D_dd4jf")
-one_way_collision = true
-one_way_collision_margin = 2.0
-
-[node name="SwitchArea" type="Area2D" parent="." index="8" unique_id=196233 groups=["Switch"]]
-position = Vector2(199, 173)
-script = ExtResource("2_4xj4b")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea" index="0" unique_id=245831631]
-shape = SubResource("RectangleShape2D_4xj4b")
-
-[node name="ColorRect2" type="ColorRect" parent="SwitchArea" index="1" unique_id=592778091]
-visible = false
-offset_left = 43.0
-offset_top = -91.0
-offset_right = 48.0
-offset_bottom = 7.0
-color = Color(1, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SwitchArea/ColorRect2" index="0" unique_id=688780572]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea/ColorRect2/StaticBody2D" index="0" unique_id=2016772304]
-position = Vector2(2.5, 49.5)
-shape = SubResource("RectangleShape2D_v0mw7")
-
-[node name="ColorRect" type="ColorRect" parent="SwitchArea" index="2" unique_id=870925849]
-offset_left = 20.0
-offset_top = -90.0
-offset_right = 25.0
-offset_bottom = 8.0
-color = Color(1, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SwitchArea/ColorRect" index="0" unique_id=1449764251]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwitchArea/ColorRect/StaticBody2D" index="0" unique_id=1915186783]
-position = Vector2(2.5, 49.5)
-shape = SubResource("RectangleShape2D_v0mw7")

@@ -26,6 +26,19 @@ func _physics_process(delta: float) -> void:
 	state_machine.process_update(delta)
 	global_position = global_position.round()
 	
+	#if EventBus.currentBlock != null:
+		#if !EventBus.currentBlock.is_in_group("DashBlock"):
+			#print(animation_player.is_playing())
+			#if animation_player.is_playing() == false:
+				#if velocity.x != 0:
+					#if animation_player.current_animation != "walk":
+						#animation_player.play("walk")
+						#print("walking forwards")
+				#else:
+					#if animation_player.current_animation != "idle":
+						#
+						#animation_player.play("idle")
+						#print("idling")
 	
 	if not is_on_floor():
 		velocity.y += gravity
@@ -50,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		
 		if EventBus.playing == true and EventBus.movementDirection.y != 1:
 			if EventBus.currentBlock != null:
-				if EventBus.currentBlock.is_in_group("MoveBlock"):
+				if EventBus.currentBlock.is_in_group("MoveBlock") and EventBus.movementDirection.y != -1:
 					print("pushed to next block by the player, ", EventBus.movementDirection)
 					EventBus.next_block.emit()
 	

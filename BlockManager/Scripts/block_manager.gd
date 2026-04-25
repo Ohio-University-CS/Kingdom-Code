@@ -85,8 +85,9 @@ func insert_after(newNode: Node2D, attachingArea: Area2D):
 
 var testing = 0
 var step = null
-#var cycles = 0
-#var checkedForCycles = false
+var cycles = 0
+var checkedForCycles = false
+@onready var player = get_parent().get_child(1).get_child(1)
 func go_next():
 	if step != null:
 		print("(run aftr) step is: ", step)
@@ -102,8 +103,10 @@ func go_next():
 			currentBlock = self
 			return
 	currentBlock = currentBlock.nextNode
-	var player = get_parent().get_child(1).get_child(1)
+	
 	EventBus.currentBlock = currentBlock
+	#player.get_child(4).get_child(0).enter()
+	
 	
 	if currentBlock.has_node("Star"): # puts a star next to the running node
 		currentBlock.get_node("Star").visible = true
@@ -115,7 +118,7 @@ func go_next():
 	if currentBlock.is_in_group("MoveBlock"):
 		EventBus.movementDirection = currentBlock._check_for_direction()
 		#print(player.global_position.x - testing)
-		EventBus.multiplier = currentBlock._check_for_multiplier()
+		#EventBus.multiplier = currentBlock._check_for_multiplier()
 		testing = player.global_position.x
 		print(EventBus.movementDirection, "this thing - block manager")
 		
@@ -137,18 +140,18 @@ func go_next():
 		else:
 			EventBus.next_block_two.emit() ## calls for player to get pos to move to
 			
-		#if !checkedForCycles:
-			#cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
-			#print("counting the amount of cycles, ", cycles)
-			#checkedForCycles = true
-		#if cycles > 1:
-			#print("tell code to run the code again")
-			#currentBlock = currentBlock.lastNode
-			#cycles -= 1
-		#else:
-			#print("done running the code")
-			#checkedForCycles = false
-			#cycles = 0
+		if !checkedForCycles:
+			cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
+			print("counting the amount of cycles, ", cycles)
+			checkedForCycles = true
+		if cycles > 1:
+			print("tell code to run the code again")
+			currentBlock = currentBlock.lastNode
+			cycles -= 1
+		else:
+			print("done running the code")
+			checkedForCycles = false
+			cycles = 0
 		
 		errorTimer.wait_time = 1 * EventBus.multiplier
 		errorTimer.start()
@@ -157,6 +160,9 @@ func go_next():
 		var raycast = player.get_child(5) #raycast position leftcast
 		if EventBus.movementDirection == Vector2.RIGHT:
 			raycast = player.get_child(6) #raycast position leftcast
+		player.get_child(0).play("dash")
+		print("running start of dash")
+		await player.get_child(0).animation_finished
 		if raycast.is_colliding():
 			var newPos = abs(raycast.global_position - raycast.get_collision_point()) * EventBus.movementDirection.x #dist to move
 			player.global_position.x += newPos.x
@@ -164,6 +170,14 @@ func go_next():
 		else:
 			player.global_position.x += 64 * EventBus.movementDirection.x #size of raycast, change if target position changes
 			print("running full length")
+		
+		player.get_child(0).play("dash_end")
+		print("running end of dash")
+		await player.get_child(0).animation_finished
+		#player.get_child(0).current_animation = "idle"
+		
+		print("running end of dash animation finished")
+		
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		
@@ -187,3 +201,4 @@ func go_next():
 func _on_error_timer_timeout() -> void: ## if a block runs for more than a timer length (1 second) it is assumed to be an error and will go to the next block
 	if EventBus.playing:
 		EventBus.next_block.emit()
+		
