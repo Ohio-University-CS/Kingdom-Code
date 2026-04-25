@@ -52,36 +52,36 @@ script = ExtResource("2_y3crg")
 block_scene = ExtResource("3_1bv57")
 
 [node name="UpBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2027981136]
-position = Vector2(6, 20)
+position = Vector2(5, 20)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("4_2eekb")
 
 [node name="LeftBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1023990329]
-position = Vector2(46, 22)
+position = Vector2(46, 20)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("5_oa2n6")
 
 [node name="DashBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2112202289]
-position = Vector2(5, 40)
+position = Vector2(5, 34)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("6_oa2n6")
 
 [node name="MoveBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=899828557]
-position = Vector2(45, 39)
+position = Vector2(46, 34)
 script = ExtResource("2_y3crg")
 
 [node name="SwitchBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=2102817754]
-position = Vector2(5, 55)
+position = Vector2(5, 64)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("8_q8e0p")
 
 [node name="WaitBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=613958365]
-position = Vector2(7, 67)
+position = Vector2(5, 50)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("9_16npy")
 
 [node name="MultiplierBlockSpawner" type="Node2D" parent="CanvasLayer/Spawners" unique_id=1106722333]
-position = Vector2(65, 69)
+position = Vector2(46, 50)
 script = ExtResource("2_y3crg")
 block_scene = ExtResource("7_xjcaf")
 

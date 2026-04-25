@@ -177,6 +177,7 @@ func go_next():
 		#player.get_child(0).current_animation = "idle"
 		
 		print("running end of dash animation finished")
+		player.get_child(4).change_state(player.get_child(4).get_child(0))
 		
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()

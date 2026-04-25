@@ -53,11 +53,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = EventBus.movementDirection.x * speed
 		#posChanged = true
 		start = global_position.x
+		state_machine.change_state($StateMachine/Walk)
 	else:
 		velocity.x = 0
 		#velocity.y += gravity
 		#if posChanged:
 		global_position.x = round((global_position.x - 8)/16)*16 + 8
+		state_machine.change_state($StateMachine/Idle)
 			#posChanged = false
 		#print("updating final position to", global_position.x)
 		

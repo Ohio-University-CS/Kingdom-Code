@@ -25,4 +25,3 @@ func exit() -> void:
 ## return:			the next state to change to, or self if no change is needed
 func process_state(_delta: float) -> State:
 	return null
-
