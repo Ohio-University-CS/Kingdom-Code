@@ -179,6 +179,19 @@ func go_next():
 		print("running end of dash animation finished")
 		player.get_child(4).change_state(player.get_child(4).get_child(0))
 		
+		if !checkedForCycles:
+			cycles = currentBlock._check_for_multiplier() #replays the one block for amount of multiplier
+			print("counting the amount of cycles, ", cycles)
+			checkedForCycles = true
+		if cycles > 1:
+			print("tell code to run the code again")
+			currentBlock = currentBlock.lastNode
+			cycles -= 1
+		else:
+			print("done running the code")
+			checkedForCycles = false
+			cycles = 0
+			
 		#player.global_position.x = ceil((player.global_position.x - 8)/16)*16 + 8 ## fixing position incase a few pixels off
 		EventBus.next_block.emit()
 		

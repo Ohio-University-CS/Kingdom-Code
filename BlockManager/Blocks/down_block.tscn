@@ -36,7 +36,7 @@ position = Vector2(11, 5)
 position = Vector2(23, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConnectToNextDetector" unique_id=810508763]
-position = Vector2(0, 5)
+position = Vector2(3, 5)
 shape = SubResource("RectangleShape2D_o5ub0")
 
 [connection signal="area_entered" from="ConnectToLastDetector" to="." method="_on_connect_to_last_detector_area_entered"]

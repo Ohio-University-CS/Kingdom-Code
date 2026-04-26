@@ -7,9 +7,11 @@ func _pull_switch():
 				get_child(i).get_child(0).visible = true
 				get_child(i).get_child(0).get_child(0).get_child(0).disabled = false
 				get_child(i).get_child(1).visible = false
+				get_child(0).set_frame(0)
 				print("door ", i, "visible")
 			else: #swaps to invisible
 				get_child(i).get_child(0).visible = false
 				get_child(i).get_child(0).get_child(0).get_child(0).disabled = true
 				get_child(i).get_child(1).visible = true
+				get_child(0).set_frame(2)
 				print("door ", i, "hidden")

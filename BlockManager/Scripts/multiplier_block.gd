@@ -37,7 +37,7 @@ func _on_button_button_up() -> void:
 		global_position = connectToBlock
 		if blockAttachingTo != null:
 			var tmpParent = blockAttachingTo.get_parent()
-			if tmpParent.is_in_group("MoveBlock"):
+			if tmpParent.is_in_group("MoveBlock") || tmpParent.is_in_group("DashBlock"):
 				call_deferred("reparent", blockAttachingTo)
 			else:
 				print("not attachable")
