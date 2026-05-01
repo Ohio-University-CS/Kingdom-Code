@@ -23,6 +23,7 @@ Example Video
  
 ## How to Run
 Option 1 Play Online: https://arw0046.itch.io/kingdom-code 
+
 Option 2 Download: https://github.com/Ohio-University-CS/Kingdom-Code/releases/tag/v1.0.0 
  
 ---
