@@ -59,7 +59,7 @@ Description: Repeats the move action X times.
  
 3. Dash (Right, Left)  
 Format: [Dash -> Direction]  
-Description: Moves the player forward by 3 tiles in the chosen direction.
+Description: Moves the player forward by 3 tiles in the chosen direction, if there is a wall within 3 tiles, player will move forward until the wall.
  
 4. Dash Multiplier (Right, Left)  
 Format: [Dash -> Direction -> X]  
@@ -73,7 +73,7 @@ Description: Activates a lever or switch in the level.
  
 2. Wait 
 Format: [Wait]  
-Description: Skips a turn and pauses movement.
+Description: Skips a turn and pauses movement for 1 second.
  
 ### Extra
  
